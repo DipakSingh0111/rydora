@@ -220,8 +220,7 @@
       },
       { "icon": "ClockIcon", "html": "Mon - Sun: 9:00 AM - 8:00 PM" }
     ],
-    "copyright": "© 2026 Rydora Car Rental Services. All Rights Reserved.",
-    "legal_links": ["Privacy Policy", "Terms & Conditions", "Sitemap"]
+    "copyright": "Copyright 2026. All Rights Reserved.Powered By Lestow."
   },
   "testimonials": {
     "section_title": "Testimonials",

@@ -18,7 +18,10 @@ const iconMap: Record<string, ReactNode> = {
 
 export default function Footer() {
   return (
-    <footer id="contact" className="relative isolate overflow-hidden bg-[#140b06] text-white">
+    <footer
+      id="contact"
+      className="relative isolate overflow-hidden bg-[#140b06] text-white"
+    >
       <Image
         src={footer.bg_image}
         alt=""
@@ -72,9 +75,15 @@ export default function Footer() {
           ))}
         </FooterColumn>
 
-        <FooterColumn title={footer.contact_title} className="col-span-2 sm:col-span-1 lg:col-span-1">
+        <FooterColumn
+          title={footer.contact_title}
+          className="col-span-2 sm:col-span-1 lg:col-span-1"
+        >
           {footer.contacts.map((c, i) => (
-            <li key={i} className="flex items-center gap-4 text-[15px] leading-relaxed text-white/90">
+            <li
+              key={i}
+              className="flex items-center gap-4 text-[15px] leading-relaxed text-white/90"
+            >
               <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#b5683a] text-white">
                 {iconMap[c.icon]}
               </span>
@@ -85,25 +94,23 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-copper/40">
-        <div className="mx-auto flex max-w-7xl flex-col gap-4 px-5 py-6 text-sm text-white/85 sm:px-8 md:flex-row md:items-center md:justify-between lg:px-12">
-          <p>{footer.copyright}</p>
-          <nav className="flex items-center md:border-l md:border-white/20 md:pl-6">
-            {footer.legal_links.map((label, i) => (
-              <span key={label} className="flex items-center">
-                {i > 0 && <span className="mx-3 h-3.5 w-px bg-copper" />}
-                <Link href="#" className="transition hover:text-copper-light">
-                  {label}
-                </Link>
-              </span>
-            ))}
-          </nav>
+        <div className="mx-auto text-center flex max-w-7xl flex-col gap-4 px-5 py-6 text-sm text-white/85 sm:px-8 md:flex-row md:items-center md:justify-between lg:px-12">
+          <p className="">{footer.copyright}</p>
         </div>
       </div>
     </footer>
   );
 }
 
-function FooterColumn({ title, children, className = "" }: { title: string; children: ReactNode; className?: string }) {
+function FooterColumn({
+  title,
+  children,
+  className = "",
+}: {
+  title: string;
+  children: ReactNode;
+  className?: string;
+}) {
   return (
     <div className={className}>
       <h3 className="text-xl font-bold">{title}</h3>
@@ -120,7 +127,18 @@ function FooterLink({ href, children }: { href: string; children: ReactNode }) {
         href={href}
         className="group flex items-center gap-3 text-[15px] text-white/90 transition hover:text-copper-light"
       >
-        <svg className="text-copper-light transition group-hover:translate-x-0.5" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+        <svg
+          className="text-copper-light transition group-hover:translate-x-0.5"
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2.6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden
+        >
           <path d="M9 6l6 6-6 6" />
         </svg>
         {children}
@@ -131,7 +149,13 @@ function FooterLink({ href, children }: { href: string; children: ReactNode }) {
 
 function PinIcon() {
   return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden
+    >
       <path d="M12 2a7 7 0 0 1 7 7c0 5-7 13-7 13S5 14 5 9a7 7 0 0 1 7-7zm0 4.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5z" />
     </svg>
   );
@@ -139,7 +163,13 @@ function PinIcon() {
 
 function PhoneIcon() {
   return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden
+    >
       <path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.37 2.3.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1L6.6 10.8z" />
     </svg>
   );
@@ -147,7 +177,13 @@ function PhoneIcon() {
 
 function MailIcon() {
   return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden
+    >
       <path d="M4 5h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zm0 2.4V17h16V7.4l-8 5-8-5zM5.6 7l6.4 4 6.4-4H5.6z" />
     </svg>
   );
@@ -155,7 +191,16 @@ function MailIcon() {
 
 function ClockIcon() {
   return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" aria-hidden>
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.2"
+      strokeLinecap="round"
+      aria-hidden
+    >
       <circle cx="12" cy="12" r="9" />
       <path d="M12 7v5l3 2" />
     </svg>
@@ -164,7 +209,13 @@ function ClockIcon() {
 
 function FacebookIcon() {
   return (
-    <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+    <svg
+      width="17"
+      height="17"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden
+    >
       <path d="M14 8.5V6.8c0-.8.5-1.3 1.3-1.3H17V2.2C16.6 2.1 15.4 2 14.1 2 11.3 2 9.6 3.7 9.6 6.6v1.9H6.8V12h2.8v10H14V12h2.8l.5-3.5H14z" />
     </svg>
   );
@@ -172,7 +223,15 @@ function FacebookIcon() {
 
 function InstagramIcon() {
   return (
-    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+    <svg
+      width="17"
+      height="17"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      aria-hidden
+    >
       <rect x="3" y="3" width="18" height="18" rx="5" />
       <circle cx="12" cy="12" r="4" />
       <circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none" />
@@ -182,7 +241,13 @@ function InstagramIcon() {
 
 function TwitterIcon() {
   return (
-    <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+    <svg
+      width="17"
+      height="17"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden
+    >
       <path d="M22 5.8c-.7.3-1.5.6-2.4.7a4.1 4.1 0 0 0 1.8-2.3c-.8.5-1.7.8-2.6 1a4.1 4.1 0 0 0-7 3.7A11.6 11.6 0 0 1 3.4 4.6a4.1 4.1 0 0 0 1.3 5.5c-.7 0-1.3-.2-1.9-.5 0 2 1.4 3.7 3.3 4.1-.6.2-1.2.2-1.9.1a4.1 4.1 0 0 0 3.8 2.8A8.2 8.2 0 0 1 2 18.3 11.6 11.6 0 0 0 8.3 20c7.5 0 11.7-6.2 11.7-11.7v-.5c.8-.6 1.5-1.3 2-2z" />
     </svg>
   );
@@ -190,7 +255,13 @@ function TwitterIcon() {
 
 function LinkedInIcon() {
   return (
-    <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+    <svg
+      width="17"
+      height="17"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden
+    >
       <path d="M6.9 21H3.3V9h3.6v12zM5.1 7.4a2.1 2.1 0 1 1 0-4.2 2.1 2.1 0 0 1 0 4.2zM21 21h-3.6v-5.8c0-1.4 0-3.2-2-3.2s-2.2 1.5-2.2 3.1V21H9.6V9H13v1.6h.1c.5-.9 1.7-1.9 3.4-1.9 3.6 0 4.3 2.4 4.3 5.5V21z" />
     </svg>
   );
