@@ -21,10 +21,11 @@ export default function Home() {
       <HowItWorks
         data={sections.WorkingProcess?.variants?.RydoraWorkingProcess1}
       />
-      <Brands data={sections.Brands?.variants?.RydoraBrands1} />
       <Testimonials
         data={sections.Testimonials?.variants?.RydoraTestimonials1}
       />
+      <Brands data={sections.Brands?.variants?.RydoraBrands1} />
+
       <BlogSection
         data={sections.BlogNews?.variants?.RydoraBlogNews1}
         limit={3}
