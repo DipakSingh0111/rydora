@@ -1,9 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
-import data from "../../data/rydora.json";
-
-const { footer } = data;
+import type { FooterData } from "@/types/rydora.types";
+import { Stagger, StaggerItem } from "./motion";
 
 const iconMap: Record<string, ReactNode> = {
   PinIcon: <PinIcon />,
@@ -12,18 +11,20 @@ const iconMap: Record<string, ReactNode> = {
   ClockIcon: <ClockIcon />,
   FacebookIcon: <FacebookIcon />,
   InstagramIcon: <InstagramIcon />,
-  TwitterIcon: <TwitterIcon />,
+  XIcon: <XIcon />,
   LinkedInIcon: <LinkedInIcon />,
 };
 
-export default function Footer() {
+export default function Footer({ data }: { data?: FooterData }) {
+  if (!data) return null;
+
   return (
     <footer
       id="contact"
       className="relative isolate overflow-hidden bg-[#140b06] text-white"
     >
       <Image
-        src={footer.bg_image}
+        src={data.bgImage}
         alt=""
         fill
         sizes="100vw"
@@ -31,22 +32,22 @@ export default function Footer() {
       />
       <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#140b06]/90 via-[#140b06]/70 to-transparent" />
 
-      <div className="mx-auto grid max-w-7xl grid-cols-2 gap-x-6 gap-y-10 px-5 pb-12 pt-16 sm:px-8 lg:grid-cols-[1.25fr_0.9fr_1fr_1.2fr] lg:gap-8 lg:px-12 lg:pt-20">
-        <div className="col-span-2 sm:col-span-1 lg:col-span-1">
+      <Stagger stagger={0.12} className="mx-auto grid max-w-7xl grid-cols-2 gap-x-6 gap-y-10 px-5 pb-12 pt-16 sm:px-8 lg:grid-cols-[1.25fr_0.9fr_1fr_1.2fr] lg:gap-8 lg:px-12 lg:pt-20">
+        <StaggerItem className="col-span-2 sm:col-span-1 lg:col-span-1">
           <Link href="/" className="inline-block">
             <Image
-              src={footer.logo}
-              alt={footer.logo_alt}
+              src={data.logo.src}
+              alt={data.logo.alt}
               width={2172}
               height={724}
               className="h-14 w-auto sm:h-16 lg:h-[70px]"
             />
           </Link>
           <p className="mt-5 max-w-xs text-[15px] leading-relaxed text-white/85">
-            {footer.description}
+            {data.description}
           </p>
           <div className="mt-7 flex gap-3">
-            {footer.socials.map((s) => (
+            {data.socials.map((s) => (
               <a
                 key={s.label}
                 href={s.href}
@@ -57,18 +58,18 @@ export default function Footer() {
               </a>
             ))}
           </div>
-        </div>
+        </StaggerItem>
 
-        <FooterColumn title={footer.quick_links_title}>
-          {footer.quick_links.map((l) => (
+        <FooterColumn title={data.quickLinks.title}>
+          {data.quickLinks.list.map((l) => (
             <FooterLink key={l.label} href={l.href}>
               {l.label}
             </FooterLink>
           ))}
         </FooterColumn>
 
-        <FooterColumn title={footer.services_title}>
-          {footer.service_links.map((label) => (
+        <FooterColumn title={data.services.title}>
+          {data.services.list.map((label) => (
             <FooterLink key={label} href="/services">
               {label}
             </FooterLink>
@@ -76,10 +77,10 @@ export default function Footer() {
         </FooterColumn>
 
         <FooterColumn
-          title={footer.contact_title}
+          title={data.contact.title}
           className="col-span-2 sm:col-span-1 lg:col-span-1"
         >
-          {footer.contacts.map((c, i) => (
+          {data.contact.list.map((c, i) => (
             <li
               key={i}
               className="flex items-center gap-4 text-[15px] leading-relaxed text-white/90"
@@ -91,11 +92,11 @@ export default function Footer() {
             </li>
           ))}
         </FooterColumn>
-      </div>
+      </Stagger>
 
       <div className="border-t border-copper/40">
         <div className="mx-auto text-center flex max-w-7xl flex-col gap-4 px-5 py-6 text-sm text-white/85 sm:px-8 md:flex-row md:items-center md:justify-between lg:px-12">
-          <p className="">{footer.copyright}</p>
+          <p className="">{data.copyright}</p>
         </div>
       </div>
     </footer>
@@ -112,11 +113,11 @@ function FooterColumn({
   className?: string;
 }) {
   return (
-    <div className={className}>
+    <StaggerItem className={className}>
       <h3 className="text-xl font-bold">{title}</h3>
       <span className="mt-3 block h-0.5 w-10 bg-copper" />
       <ul className="mt-6 space-y-3.5">{children}</ul>
-    </div>
+    </StaggerItem>
   );
 }
 
@@ -239,7 +240,7 @@ function InstagramIcon() {
   );
 }
 
-function TwitterIcon() {
+function XIcon() {
   return (
     <svg
       width="17"
@@ -248,7 +249,7 @@ function TwitterIcon() {
       fill="currentColor"
       aria-hidden
     >
-      <path d="M22 5.8c-.7.3-1.5.6-2.4.7a4.1 4.1 0 0 0 1.8-2.3c-.8.5-1.7.8-2.6 1a4.1 4.1 0 0 0-7 3.7A11.6 11.6 0 0 1 3.4 4.6a4.1 4.1 0 0 0 1.3 5.5c-.7 0-1.3-.2-1.9-.5 0 2 1.4 3.7 3.3 4.1-.6.2-1.2.2-1.9.1a4.1 4.1 0 0 0 3.8 2.8A8.2 8.2 0 0 1 2 18.3 11.6 11.6 0 0 0 8.3 20c7.5 0 11.7-6.2 11.7-11.7v-.5c.8-.6 1.5-1.3 2-2z" />
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
     </svg>
   );
 }

@@ -1,39 +1,46 @@
 import Image from "next/image";
 import Link from "next/link";
-import data from "../../data/rydora.json";
-
-const { about } = data;
+import type { AboutUsData } from "@/types/rydora.types";
+import { Reveal, Stagger, StaggerItem } from "./motion";
 
 const iconMap: Record<string, React.ReactNode> = {
   CarFrontIcon: <CarFrontIcon />,
   ChauffeurIcon: <ChauffeurIcon />,
 };
 
-export default function About({ hideButton = false }: { hideButton?: boolean } = {}) {
+export default function About({
+  data,
+  hideButton = false,
+}: {
+  data?: AboutUsData;
+  hideButton?: boolean;
+}) {
+  if (!data) return null;
+
   return (
     <section id="about" className="bg-white py-10 text-neutral-900 sm:py-12">
       <div className="mx-auto grid max-w-7xl items-center gap-10 px-5 sm:px-8 lg:grid-cols-2 lg:gap-14 lg:px-12">
-        <div>
+        <Reveal x={-40} y={0}>
           <p className="flex items-center gap-3 text-sm font-medium text-neutral-800">
             <SmallCarIcon />
             <span className="h-px w-10 bg-copper" />
-            {about.section_title}
+            {data.badge}
           </p>
 
           <h2 className="mt-4 text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl lg:text-[52px]">
-            {about.main_heading}
-            <span className="block text-[#a8521f]">{about.main_heading_highlight}</span>
+            {data.heading.main}
+            <span className="block text-[#a8521f]">{data.heading.highlight}</span>
           </h2>
 
           <p className="mt-5 max-w-xl text-base leading-relaxed text-neutral-600">
-            {about.description}
+            {data.description}
           </p>
 
-          <div className="mt-7 grid gap-4 sm:grid-cols-2">
-            {about.highlights.map((h) => (
-              <div
+          <Stagger className="mt-7 grid gap-4 sm:grid-cols-2" delay={0.3} stagger={0.15}>
+            {data.list.map((h) => (
+              <StaggerItem
                 key={h.title}
-                className="rounded-2xl border border-neutral-200/80 bg-gradient-to-br from-white to-[#fdf6f1] p-5 shadow-[0_6px_24px_rgba(120,60,20,0.06)]"
+                className="rounded-2xl border border-neutral-200/80 bg-gradient-to-br from-white to-[#fdf6f1] p-5 shadow-[0_6px_24px_rgba(120,60,20,0.06)] transition-shadow hover:shadow-[0_14px_34px_rgba(120,60,20,0.12)]"
               >
                 <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[#f6e3d6] text-[#a8521f]">
                   {iconMap[h.icon]}
@@ -42,16 +49,16 @@ export default function About({ hideButton = false }: { hideButton?: boolean } =
                 <p className="mt-1.5 text-[15px] leading-relaxed text-neutral-600">
                   {h.text}
                 </p>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
 
           {!hideButton && (
             <Link
-              href={about.button_link}
+              href={data.cta.href}
               className="mt-7 inline-flex items-center gap-3 rounded-full bg-gradient-to-b from-copper to-copper-dark px-7 py-3 text-[15px] font-semibold text-white shadow-md shadow-copper/25 transition hover:brightness-110"
             >
-              {about.button_text}
+              {data.cta.label}
               <svg
                 width="18"
                 height="18"
@@ -67,17 +74,22 @@ export default function About({ hideButton = false }: { hideButton?: boolean } =
               </svg>
             </Link>
           )}
-        </div>
+        </Reveal>
 
-        <div className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.18)] lg:aspect-auto lg:h-full lg:min-h-[480px]">
+        <Reveal
+          x={40}
+          y={0}
+          delay={0.15}
+          className="group relative aspect-[4/3] overflow-hidden rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.18)] lg:aspect-auto lg:h-full lg:min-h-[480px]"
+        >
           <Image
-            src={about.image}
-            alt={about.image_alt}
+            src={data.image.src}
+            alt={data.image.alt}
             fill
             sizes="(min-width: 1024px) 50vw, 100vw"
-            className="object-cover"
+            className="object-cover transition-transform duration-700 group-hover:scale-105"
           />
-        </div>
+        </Reveal>
       </div>
     </section>
   );

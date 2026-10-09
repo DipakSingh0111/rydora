@@ -3,6 +3,7 @@ import About from "../components/About";
 import HowItWorks from "../components/HowItWorks";
 import PageBanner from "../components/PageBanner";
 import WhyChooseUs from "../components/WhyChooseUs";
+import { getRydoraSections } from "@/lib/rydora";
 
 export const metadata: Metadata = {
   title: "About Us",
@@ -11,12 +12,14 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
+  const sections = getRydoraSections();
+
   return (
     <main className="flex-1">
       <PageBanner title="About Us" />
-      <About hideButton />
-      <HowItWorks />
-      <WhyChooseUs />
+      <About data={sections.AboutUs?.variants?.RydoraAboutUs1} hideButton />
+      <HowItWorks data={sections.WorkingProcess?.variants?.RydoraWorkingProcess1} />
+      <WhyChooseUs data={sections.WhyChooseUs?.variants?.RydoraWhyChooseUs1} />
     </main>
   );
 }

@@ -2,11 +2,10 @@
 
 import React, { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight, Star, User } from "lucide-react";
-import data from "../../data/rydora.json";
+import type { TestimonialsData } from "@/types/rydora.types";
+import { Reveal } from "./motion";
 
-const { testimonials } = data;
-
-export default function Testimonials() {
+export default function Testimonials({ data }: { data?: TestimonialsData }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [activeArrow, setActiveArrow] = useState<"prev" | "next">("next");
   const [cardsPerView, setCardsPerView] = useState(3);
@@ -23,7 +22,7 @@ export default function Testimonials() {
   }, []);
 
   // Responsive max index taaki end mein khaali space na bache
-  const total = testimonials.list.length;
+  const total = data?.list.length ?? 0;
   const maxIndex = Math.max(0, total - cardsPerView);
 
   // Ek baar mein 1 card peeche
@@ -38,9 +37,11 @@ export default function Testimonials() {
     setActiveArrow("next");
   };
 
+  if (!data) return null;
+
   return (
     <section className="w-full bg-[#fbfbfa] py-10 sm:py-12 px-5 sm:px-8 lg:px-12 overflow-hidden">
-      <div className="max-w-7xl mx-auto">
+      <Reveal className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Left Column: Heading & Controls */}
           <div className="lg:col-span-4 flex flex-col justify-between self-stretch pr-0 lg:pr-6">
@@ -49,19 +50,19 @@ export default function Testimonials() {
               <div className="flex items-center gap-2 mb-4">
                 <span className="w-4 h-[2px] bg-[#c85a17]" />
                 <span className="text-xs font-bold tracking-wider text-[#c85a17] uppercase">
-                  {testimonials.section_title}
+                  {data.badge}
                 </span>
               </div>
 
               {/* Main Heading */}
               <h2 className="text-3xl sm:text-4xl font-extrabold text-[#111827] leading-[1.2] tracking-tight mb-4">
-                {testimonials.main_heading_part1} <br />
-                <span className="text-[#c85a17]">{testimonials.main_heading_highlight}</span>
+                {data.heading.main} <br />
+                <span className="text-[#c85a17]">{data.heading.highlight}</span>
               </h2>
 
               {/* Description */}
               <p className="text-sm leading-relaxed text-[#6b7280]">
-                {testimonials.description}
+                {data.description}
               </p>
             </div>
 
@@ -102,7 +103,7 @@ export default function Testimonials() {
                 transform: `translateX(calc(-${currentIndex} * (100% / ${cardsPerView} + 20px / ${cardsPerView})))`,
               }}
             >
-              {testimonials.list.map((item) => (
+              {data.list.map((item) => (
                 <div
                   key={item.id}
                   className="w-full sm:w-[calc(50%-10px)] lg:w-[calc((100%-40px)/3)] shrink-0 relative bg-[#fdfbf7] border border-[#f3eee7] rounded-2xl p-6 shadow-sm hover:shadow-md transition-all flex flex-col justify-between"
@@ -140,7 +141,7 @@ export default function Testimonials() {
 
                     {/* Testimonial Body */}
                     <p className="text-xs sm:text-[13px] leading-relaxed text-[#4b5563]">
-                      {item.text}
+                      {item.quote}
                     </p>
                   </div>
                 </div>
@@ -164,7 +165,7 @@ export default function Testimonials() {
             />
           ))}
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }

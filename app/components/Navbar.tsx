@@ -4,11 +4,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import data from "../../data/rydora.json";
+import type { HeaderData } from "@/types/rydora.types";
 
-const { navbar } = data;
-
-export default function Navbar() {
+export default function Navbar({ data }: { data?: HeaderData }) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const isActive = (href: string) => href === pathname;
@@ -20,6 +18,8 @@ export default function Navbar() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  if (!data) return null;
 
   return (
     <header
@@ -36,19 +36,19 @@ export default function Navbar() {
       >
         <Link href="/" className="shrink-0">
           <Image
-            src={navbar.logo}
-            alt={navbar.logo_alt}
+            src={data.logo.src}
+            alt={data.logo.alt}
             width={2172}
             height={724}
             priority
             className={`w-auto transition-all duration-500 ease-out ${
-              scrolled ? "h-12 sm:h-14 lg:h-[58px]" : "h-14 sm:h-16 lg:h-[70px]"
+              scrolled ? "h-12 sm:h-14 lg:h-[58px]" : "h-14 sm:h-16 lg:h-[clamp(3.25rem,9vh,4.375rem)]"
             }`}
           />
         </Link>
 
-        <nav className="hidden items-center gap-8 lg:flex">
-          {navbar.links.map((link) => (
+        <nav className="hidden items-center gap-6 lg:flex xl:gap-8">
+          {data.menu.map((link) => (
             <Link
               key={link.label}
               href={link.href}
@@ -64,10 +64,10 @@ export default function Navbar() {
         </nav>
 
         <Link
-          href={navbar.enquire_button_link_desktop}
-          className="hidden items-center gap-3 rounded-full border border-copper-light/60 bg-gradient-to-b from-copper-light to-copper-dark px-7 py-3 text-[15px] font-semibold text-white shadow-lg shadow-black/30 transition hover:brightness-110 lg:inline-flex"
+          href={data.cta.href}
+          className="hidden items-center gap-3 rounded-full border border-copper-light/60 bg-gradient-to-b from-copper-light to-copper-dark px-6 py-3 text-[15px] font-semibold text-white shadow-lg shadow-black/30 transition hover:brightness-110 lg:inline-flex xl:px-7"
         >
-          {navbar.enquire_button_text}
+          {data.cta.label}
           <ArrowRight />
         </Link>
 
@@ -99,7 +99,7 @@ export default function Navbar() {
       {open && (
         <div className="mx-5 rounded-2xl border border-white/10 bg-black/85 p-5 backdrop-blur-md lg:hidden">
           <nav className="flex flex-col gap-1">
-            {navbar.links.map((link) => (
+            {data.menu.map((link) => (
               <Link
                 key={link.label}
                 href={link.href}
@@ -115,11 +115,11 @@ export default function Navbar() {
             ))}
           </nav>
           <Link
-            href={navbar.enquire_button_link_mobile}
+            href={data.cta.hrefMobile ?? data.cta.href}
             onClick={() => setOpen(false)}
             className="mt-4 flex items-center justify-center gap-3 rounded-full bg-gradient-to-b from-copper-light to-copper-dark px-6 py-3 font-semibold text-white"
           >
-            {navbar.enquire_button_text}
+            {data.cta.label}
             <ArrowRight />
           </Link>
         </div>

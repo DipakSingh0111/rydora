@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import PageBanner from "../components/PageBanner";
 import PopularCars from "../components/PopularCars";
 import WhyChooseUs from "../components/WhyChooseUs";
+import { getRydoraSections } from "@/lib/rydora";
 
 export const metadata: Metadata = {
   title: "Cars",
@@ -9,11 +10,13 @@ export const metadata: Metadata = {
 };
 
 export default function CarsPage() {
+  const sections = getRydoraSections();
+
   return (
     <main className="flex-1">
       <PageBanner title="Cars" />
-      <PopularCars isGrid />
-      <WhyChooseUs />
+      <PopularCars data={sections.Fleet?.variants?.RydoraFleet1} isGrid />
+      <WhyChooseUs data={sections.WhyChooseUs?.variants?.RydoraWhyChooseUs1} />
     </main>
   );
 }

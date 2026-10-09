@@ -1,8 +1,7 @@
 import Image from "next/image";
 import type { ReactNode } from "react";
-import data from "../../data/rydora.json";
-
-const { why_choose_us } = data;
+import type { WhyChooseUsData, WhyChooseUsFeature } from "@/types/rydora.types";
+import { Reveal, Stagger, StaggerItem } from "./motion";
 
 const iconMap: Record<string, ReactNode> = {
   FleetIcon: <FleetIcon />,
@@ -13,70 +12,70 @@ const iconMap: Record<string, ReactNode> = {
   ReadyIcon: <ReadyIcon />,
 };
 
-type Feature = { title: string; text: string; icon: string };
+export default function WhyChooseUs({ data }: { data?: WhyChooseUsData }) {
+  if (!data) return null;
 
-export default function WhyChooseUs() {
   return (
     <section
       id="why-choose-us"
       className="bg-gradient-to-b from-white via-[#fdf9f6] to-white py-16 text-neutral-900 sm:py-20"
     >
       <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
-        <div className="mx-auto max-w-2xl text-center">
+        <Reveal className="mx-auto max-w-2xl text-center">
           <p className="flex items-center justify-center gap-3 text-sm font-semibold text-[#a8521f]">
             <span className="h-0.5 w-10 bg-[#a8521f]" />
-            {why_choose_us.section_title}
+            {data.badge}
             <span className="h-0.5 w-10 bg-[#a8521f]" />
           </p>
           <h2 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl lg:text-[42px]">
-            {why_choose_us.main_heading} <span className="text-[#a8521f]">{why_choose_us.main_heading_highlight}</span>
+            {data.heading.main} <span className="text-[#a8521f]">{data.heading.highlight}</span>
           </h2>
           <p className="mx-auto mt-3 max-w-xl text-base leading-relaxed text-neutral-600">
-            {why_choose_us.description}
+            {data.description}
           </p>
-        </div>
+        </Reveal>
 
         <div className="mt-12 grid items-center gap-10 lg:grid-cols-[1fr_250px_1fr] lg:gap-6">
-          <FeatureList features={why_choose_us.left_features} />
+          <FeatureList features={data.leftFeatures} />
 
-          <div className="relative mx-auto w-full max-w-[250px]">
+          <Reveal className="relative mx-auto w-full max-w-[250px]" y={0} scale={0.88} duration={0.9}>
             <span className="absolute -left-2.5 top-1/2 h-24 w-1 -translate-y-1/2 rounded-full bg-[#a8521f]" />
             <span className="absolute -right-2.5 top-1/2 h-24 w-1 -translate-y-1/2 rounded-full bg-[#a8521f]" />
             <div className="rounded-[130px] border border-[#f0dccd] bg-gradient-to-b from-[#fdf3ec] to-white p-2.5 shadow-[0_18px_45px_rgba(168,82,31,0.16)]">
               <div className="relative aspect-[7/10] overflow-hidden rounded-[120px]">
                 <Image
-                  src={why_choose_us.image}
-                  alt={why_choose_us.image_alt}
+                  src={data.image.src}
+                  alt={data.image.alt}
                   fill
                   sizes="250px"
                   className="object-cover"
                 />
               </div>
             </div>
-          </div>
+          </Reveal>
 
-          <FeatureList features={why_choose_us.right_features} />
+          <FeatureList features={data.rightFeatures} />
         </div>
       </div>
     </section>
   );
 }
 
-function FeatureList({ features }: { features: Feature[] }) {
+function FeatureList({ features }: { features: WhyChooseUsFeature[] }) {
   return (
-    <ul className="divide-y divide-[#ece4de]">
+    <Stagger as="ul" stagger={0.15} delay={0.2} className="divide-y divide-[#ece4de]">
       {features.map((f) => (
-        <li key={f.title} className="flex items-start gap-6 py-7 first:pt-0 last:pb-0">
-          <span className="flex h-[62px] w-[62px] shrink-0 items-center justify-center rounded-full border border-[#e2b99c] bg-white text-[#a8521f] shadow-[0_8px_20px_rgba(168,82,31,0.12)]">
+        <StaggerItem as="li" key={f.title} className="group flex items-start gap-6 py-7 first:pt-0 last:pb-0">
+          <span className="flex h-[62px] w-[62px] shrink-0 items-center justify-center rounded-full border border-[#e2b99c] bg-white text-[#a8521f] shadow-[0_8px_20px_rgba(168,82,31,0.12)] transition duration-300 group-hover:bg-[#a8521f] group-hover:text-white">
             {iconMap[f.icon]}
           </span>
           <div className="pt-0.5">
             <h3 className="text-lg font-bold">{f.title}</h3>
             <p className="mt-1.5 max-w-[240px] text-sm leading-relaxed text-neutral-600">{f.text}</p>
           </div>
-        </li>
+        </StaggerItem>
       ))}
-    </ul>
+    </Stagger>
   );
 }
 

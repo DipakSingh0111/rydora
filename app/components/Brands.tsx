@@ -2,11 +2,10 @@
 
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
-import data from "../../data/rydora.json";
+import type { BrandsData } from "@/types/rydora.types";
+import { Reveal } from "./motion";
 
-const { brands } = data;
-
-export default function Brands() {
+export default function Brands({ data }: { data?: BrandsData }) {
   const trackRef = useRef<HTMLDivElement>(null);
   const [pages, setPages] = useState(1);
   const [page, setPage] = useState(0);
@@ -37,20 +36,22 @@ export default function Brands() {
 
   const step = (dir: 1 | -1) => goTo(Math.min(pages - 1, Math.max(0, page + dir)));
 
+  if (!data) return null;
+
   return (
     <section id="brands" className="bg-[#fcfbf9] py-10 text-neutral-900 sm:py-12">
-      <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
+      <Reveal className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
         <div className="flex items-end justify-between gap-6">
           <div>
             <p className="flex items-center gap-3 text-sm font-semibold text-[#a8521f]">
               <span className="h-px w-10 bg-copper" />
-              {brands.section_title}
+              {data.badge}
             </p>
             <h2 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl lg:text-[44px]">
-              {brands.main_heading} <span className="text-[#a8521f]">{brands.main_heading_highlight}</span>
+              {data.heading.main} <span className="text-[#a8521f]">{data.heading.highlight}</span>
             </h2>
             <p className="mt-3 max-w-xl text-base leading-relaxed text-neutral-600">
-              {brands.description}
+              {data.description}
             </p>
           </div>
 
@@ -65,7 +66,7 @@ export default function Brands() {
           onScroll={measure}
           className="-mx-2 mt-8 flex snap-x snap-mandatory gap-3 overflow-x-auto px-2 py-2 [scrollbar-width:none] sm:gap-4 [&::-webkit-scrollbar]:hidden"
         >
-          {brands.list.map((brand) => (
+          {data.list.map((brand) => (
             <div
               key={brand.name}
               className="flex aspect-[11/10] w-[calc((100%-24px)/3)] shrink-0 snap-start items-center justify-center rounded-xl border border-neutral-200/80 bg-white shadow-[0_4px_18px_rgba(120,60,20,0.06)] transition hover:-translate-y-0.5 hover:shadow-[0_10px_26px_rgba(120,60,20,0.12)] sm:w-[calc((100%-48px)/4)] md:w-[calc((100%-80px)/6)] lg:w-[calc((100%-112px)/8)]"
@@ -95,7 +96,7 @@ export default function Brands() {
             />
           ))}
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }

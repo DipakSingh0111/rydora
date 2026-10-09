@@ -1,9 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
-import data from "../../data/rydora.json";
-
-const { services } = data;
+import type { ServicesData } from "@/types/rydora.types";
+import { Reveal, Stagger, StaggerItem } from "./motion";
 
 const iconMap: Record<string, ReactNode> = {
   CarIcon: <CarIcon />,
@@ -16,40 +15,48 @@ const iconMap: Record<string, ReactNode> = {
   SteeringIcon: <SteeringIcon />,
 };
 
-export default function Services({ showViewAll = true }: { showViewAll?: boolean }) {
+export default function Services({
+  data,
+  showViewAll = true,
+}: {
+  data?: ServicesData;
+  showViewAll?: boolean;
+}) {
+  if (!data) return null;
+
   return (
     <section id="services" className="bg-[#fcfaf8] py-10 text-neutral-900 sm:py-12">
       <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
-        <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+        <Reveal className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="flex items-center gap-3 text-sm font-medium text-copper-dark">
               <span className="h-px w-10 bg-copper" />
-              {services.section_title}
+              {data.badge}
             </p>
             <h2 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl lg:text-[44px]">
-              {services.main_heading} <span className="text-[#a8521f]">{services.main_heading_highlight}</span>
+              {data.heading.main} <span className="text-[#a8521f]">{data.heading.highlight}</span>
             </h2>
             <p className="mt-3 max-w-2xl text-base leading-relaxed text-neutral-600">
-              {services.description}
+              {data.description}
             </p>
           </div>
 
           {showViewAll && (
             <Link
-              href={services.view_all_link}
+              href={data.cta.href}
               className="group inline-flex shrink-0 items-center gap-2 text-[15px] font-semibold text-[#a8521f] hover:text-copper-dark"
             >
-              {services.view_all_text}
+              {data.cta.label}
               <Arrow className="transition group-hover:translate-x-1" />
             </Link>
           )}
-        </div>
+        </Reveal>
 
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {services.list.map((s) => (
+        <Stagger className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4" stagger={0.08}>
+          {data.list.map((s) => (
+            <StaggerItem key={s.title}>
             <article
-              key={s.title}
-              className="group relative overflow-hidden rounded-xl border border-neutral-200/70 bg-white p-5 shadow-[0_6px_24px_rgba(120,60,20,0.06)] transition hover:-translate-y-1 hover:shadow-[0_14px_34px_rgba(120,60,20,0.12)]"
+              className="group relative h-full overflow-hidden rounded-xl border border-neutral-200/70 bg-white p-5 shadow-[0_6px_24px_rgba(120,60,20,0.06)] transition hover:-translate-y-1 hover:shadow-[0_14px_34px_rgba(120,60,20,0.12)]"
             >
               <div className="flex items-start justify-between">
                 <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#f8e4d7] text-[#a8521f]">
@@ -77,8 +84,9 @@ export default function Services({ showViewAll = true }: { showViewAll?: boolean
                 <Arrow />
               </Link>
             </article>
+            </StaggerItem>
           ))}
-        </div>
+        </Stagger>
       </div>
     </section>
   );

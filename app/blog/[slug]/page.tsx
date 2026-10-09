@@ -11,9 +11,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import PageBanner from "../../components/PageBanner";
 import { blogs, getBlogBySlug, getBlogCategories } from "../../data/blogs";
-import data from "../../../data/rydora.json";
-
-const { blog_sidebar } = data;
+import { getRydoraSections } from "@/lib/rydora";
 
 export function generateStaticParams() {
   return blogs.map((b) => ({ slug: b.slug }));
@@ -53,6 +51,8 @@ async function BlogDetailContent({ params }: { params: Promise<{ slug: string }>
 
   const categories = getBlogCategories();
   const recent = blogs.filter((b) => b.slug !== post.slug).slice(0, 4);
+  const sidebar = getRydoraSections().BlogNews?.variants?.RydoraBlogNews1?.sidebar;
+  if (!sidebar) return null;
 
   return (
     <section className="bg-white py-14 text-neutral-900 sm:py-20">
@@ -114,7 +114,7 @@ async function BlogDetailContent({ params }: { params: Promise<{ slug: string }>
 
           <aside className="flex flex-col gap-6">
             <div className="rounded-2xl bg-[#f8f4f0] p-5">
-              <h2 className="text-xl font-bold">{blog_sidebar.categories_title}</h2>
+              <h2 className="text-xl font-bold">{sidebar.categoriesTitle}</h2>
               <ul className="mt-4 space-y-2.5">
                 {categories.map((c) => {
                   const active = c.name === post.category;
@@ -139,7 +139,7 @@ async function BlogDetailContent({ params }: { params: Promise<{ slug: string }>
             </div>
 
             <div className="rounded-2xl bg-[#f8f4f0] p-5">
-              <h2 className="text-xl font-bold">{blog_sidebar.recent_blogs_title}</h2>
+              <h2 className="text-xl font-bold">{sidebar.recentBlogsTitle}</h2>
               <ul className="mt-4 space-y-4">
                 {recent.map((r) => (
                   <li key={r.slug}>
@@ -173,7 +173,7 @@ async function BlogDetailContent({ params }: { params: Promise<{ slug: string }>
 
             <div className="relative isolate overflow-hidden rounded-2xl bg-black p-6 text-white">
               <Image
-                src={blog_sidebar.cta.image}
+                src={sidebar.cta.image}
                 alt=""
                 fill
                 sizes="300px"
@@ -181,22 +181,22 @@ async function BlogDetailContent({ params }: { params: Promise<{ slug: string }>
               />
               <div className="absolute inset-0 -z-10 bg-gradient-to-b from-black/80 via-black/40 to-black/20" />
               <p className="text-xs font-semibold text-white/80">
-                {blog_sidebar.cta.tagline}
+                {sidebar.cta.badge}
               </p>
               <span className="mt-2 block h-0.5 w-8 bg-copper" />
               <h3 className="mt-3 text-2xl font-bold leading-tight">
-                {blog_sidebar.cta.heading_part1}
+                {sidebar.cta.heading.main}
                 <br />
-                {blog_sidebar.cta.heading_part2}
+                {sidebar.cta.heading.highlight}
               </h3>
               <p className="mt-3 max-w-[200px] text-sm leading-relaxed text-white/85">
-                {blog_sidebar.cta.description}
+                {sidebar.cta.description}
               </p>
               <Link
-                href={blog_sidebar.cta.button_link}
+                href={sidebar.cta.button.href}
                 className="mt-5 inline-flex items-center gap-2 rounded-md bg-gradient-to-b from-[#c4561f] to-[#a8461a] px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-black/40 transition hover:brightness-110"
               >
-                {blog_sidebar.cta.button_text}
+                {sidebar.cta.button.label}
                 <ArrowRight size={16} />
               </Link>
               <div className="h-36" />

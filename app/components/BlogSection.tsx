@@ -2,11 +2,20 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { blogs } from "../data/blogs";
-import data from "../../data/rydora.json";
+import type { BlogNewsData } from "@/types/rydora.types";
+import { Reveal, Stagger, StaggerItem } from "./motion";
 
-const { blog_section } = data;
+export default function BlogSection({
+  data,
+  limit,
+  categorySlug,
+}: {
+  data?: BlogNewsData;
+  limit?: number;
+  categorySlug?: string;
+}) {
+  if (!data) return null;
 
-export default function BlogSection({ limit, categorySlug }: { limit?: number; categorySlug?: string }) {
   let posts = blogs;
 
   if (categorySlug) {
@@ -23,41 +32,41 @@ export default function BlogSection({ limit, categorySlug }: { limit?: number; c
       className="w-full bg-[#fbfbfa] py-14 sm:py-16 px-5 sm:px-8 lg:px-12"
     >
       <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+        <Reveal className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
           <div className="max-w-2xl">
             <div className="flex items-center gap-2 mb-3">
               <span className="w-5 h-[2px] bg-[#c85a17]" />
               <span className="text-xs font-bold tracking-wider text-[#c85a17]">
-                {blog_section.section_title}
+                {data.badge}
               </span>
             </div>
 
             <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-extrabold text-[#111827] tracking-tight leading-tight">
-              {blog_section.main_heading}{" "}
-              <span className="text-[#c85a17]">{blog_section.main_heading_highlight}</span>
+              {data.heading.main}{" "}
+              <span className="text-[#c85a17]">{data.heading.highlight}</span>
             </h2>
 
             <p className="mt-3 text-sm text-[#6b7280] leading-relaxed max-w-xl">
-              {blog_section.description}
+              {data.description}
             </p>
           </div>
 
           {limit && limit < blogs.length && (
             <Link
-              href={blog_section.view_all_link}
+              href={data.cta.href}
               className="group inline-flex shrink-0 items-center gap-2 text-[15px] font-semibold text-[#c85a17]"
             >
-              {blog_section.view_all_text}
+              {data.cta.label}
               <ArrowRight className="w-4 h-4 transition group-hover:translate-x-1" />
             </Link>
           )}
-        </div>
+        </Reveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
+        <Stagger className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7" stagger={0.12}>
           {posts.map((post) => (
+            <StaggerItem key={post.slug}>
             <article
-              key={post.slug}
-              className="group bg-white border border-[#f3eee7] rounded-2xl overflow-hidden shadow-[0_6px_24px_rgba(120,60,20,0.06)] hover:shadow-[0_14px_34px_rgba(120,60,20,0.12)] transition-shadow duration-300 flex flex-col"
+              className="group h-full bg-white border border-[#f3eee7] rounded-2xl overflow-hidden shadow-[0_6px_24px_rgba(120,60,20,0.06)] hover:shadow-[0_14px_34px_rgba(120,60,20,0.12)] transition-shadow duration-300 flex flex-col"
             >
               <div className="relative w-full h-56 sm:h-60 overflow-hidden bg-gray-100">
                 <Image
@@ -98,14 +107,15 @@ export default function BlogSection({ limit, categorySlug }: { limit?: number; c
                     href={`/blog/${post.slug}`}
                     className="inline-flex items-center gap-2 border-b-2 border-[#c85a17]/60 pb-0.5 text-xs font-bold text-[#c85a17] hover:gap-3 transition-all duration-200"
                   >
-                    {blog_section.read_more_text}
+                    {data.readMore}
                     <ArrowRight className="w-4 h-4" />
                   </Link>
                 </div>
               </div>
             </article>
+            </StaggerItem>
           ))}
-        </div>
+        </Stagger>
       </div>
     </section>
   );

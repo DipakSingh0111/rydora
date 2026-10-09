@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import BlogSection from "../components/BlogSection";
+import { getRydoraSections } from "@/lib/rydora";
 import PageBanner from "../components/PageBanner";
 
 export const metadata: Metadata = {
@@ -9,10 +10,12 @@ export const metadata: Metadata = {
 };
 
 export default function BlogPage() {
+  const sections = getRydoraSections();
+
   return (
     <main className="flex-1">
       <PageBanner title="Blogs" />
-      <BlogSection />
+      <BlogSection data={sections.BlogNews?.variants?.RydoraBlogNews1} />
     </main>
   );
 }

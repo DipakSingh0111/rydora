@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Reveal } from "./motion";
 
 type Crumb = { label: string; href?: string };
 
@@ -18,18 +19,21 @@ export default function PageBanner({
 }: PageBannerProps) {
   return (
     <section className="relative isolate flex min-h-[340px] items-end overflow-hidden bg-black sm:min-h-[400px]">
-      <Image
-        src={image}
-        alt={imageAlt}
-        fill
-        priority
-        sizes="100vw"
-        className="-z-20 object-cover object-right"
-      />
+      <Reveal className="absolute inset-0 -z-20" y={0} scale={1.1} duration={1.6}>
+        <Image
+          src={image}
+          alt={imageAlt}
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-right"
+        />
+      </Reveal>
       <div className="absolute inset-0 -z-10 bg-gradient-to-r from-black/85 via-black/55 to-black/10" />
       <div className="absolute inset-x-0 top-0 -z-10 h-36 bg-gradient-to-b from-black/70 to-transparent" />
 
       <div className="mx-auto w-full max-w-7xl px-5 pb-14 pt-36 sm:px-8 sm:pb-20 lg:px-12">
+        <Reveal as="div" delay={0.2} y={20}>
         <nav aria-label="Breadcrumb">
           <ol className="flex flex-wrap items-center gap-1.5 text-sm font-medium text-white/90">
             <li aria-hidden className="mr-1">
@@ -54,8 +58,11 @@ export default function PageBanner({
             })}
           </ol>
         </nav>
+        </Reveal>
 
-        <h1 className="mt-3 text-4xl font-bold tracking-tight text-white sm:text-5xl">{title}</h1>
+        <Reveal as="h1" delay={0.35} className="mt-3 text-4xl font-bold tracking-tight text-white sm:text-5xl">
+          {title}
+        </Reveal>
       </div>
     </section>
   );

@@ -3,12 +3,12 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
-import data from "../../data/rydora.json";
+import type { GalleryData } from "@/types/rydora.types";
 
-const { car_gallery } = data;
-
-export default function CarGallery() {
+export default function CarGallery({ data }: { data?: GalleryData }) {
   const [activeImageIndex, setActiveImageIndex] = useState<number | null>(null);
+  const images = data?.list ?? [];
+  const count = images.length;
 
   // Keyboard navigation (Arrow keys + Escape to close)
   useEffect(() => {
@@ -21,14 +21,14 @@ export default function CarGallery() {
         setActiveImageIndex((prev) =>
           prev !== null
             ? prev === 0
-              ? car_gallery.images.length - 1
+              ? count - 1
               : prev - 1
             : null,
         );
       } else if (e.key === "ArrowRight") {
         setActiveImageIndex((prev) =>
           prev !== null
-            ? prev === car_gallery.images.length - 1
+            ? prev === count - 1
               ? 0
               : prev + 1
             : null,
@@ -38,7 +38,7 @@ export default function CarGallery() {
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [activeImageIndex]);
+  }, [activeImageIndex, count]);
 
   useEffect(() => {
     if (activeImageIndex !== null) {
@@ -54,23 +54,25 @@ export default function CarGallery() {
   const handleNext = (e: React.MouseEvent) => {
     e.stopPropagation();
     setActiveImageIndex((prev) =>
-      prev !== null ? (prev === car_gallery.images.length - 1 ? 0 : prev + 1) : 0,
+      prev !== null ? (prev === count - 1 ? 0 : prev + 1) : 0,
     );
   };
 
   const handlePrev = (e: React.MouseEvent) => {
     e.stopPropagation();
     setActiveImageIndex((prev) =>
-      prev !== null ? (prev === 0 ? car_gallery.images.length - 1 : prev - 1) : 0,
+      prev !== null ? (prev === 0 ? count - 1 : prev - 1) : 0,
     );
   };
+
+  if (!data) return null;
 
   return (
     <section className="w-full bg-[#fbfbfa] py-12 px-5 sm:px-8 lg:px-12">
       <div className="max-w-7xl mx-auto">
         {/* 4 Column Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5">
-          {car_gallery.images.map((image, index) => (
+          {images.map((image, index) => (
             <button
               key={image.id}
               type="button"
@@ -124,8 +126,8 @@ export default function CarGallery() {
             className="relative max-h-[85vh] max-w-5xl w-full aspect-[16/10] overflow-hidden rounded-2xl shadow-2xl bg-black"
           >
             <Image
-              src={car_gallery.images[activeImageIndex].src}
-              alt={car_gallery.images[activeImageIndex].alt}
+              src={images[activeImageIndex].src}
+              alt={images[activeImageIndex].alt}
               fill
               priority
               className="object-contain"
@@ -144,7 +146,7 @@ export default function CarGallery() {
 
           {/* Index */}
           <div className="absolute bottom-5 left-1/2 -translate-x-1/2 rounded-full bg-black/50 px-3.5 py-1 text-xs font-medium text-white/90 backdrop-blur-sm">
-            {activeImageIndex + 1} / {car_gallery.images.length}
+            {activeImageIndex + 1} / {count}
           </div>
         </div>
       )}

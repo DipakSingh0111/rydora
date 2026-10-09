@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import BlogSection from "../../../components/BlogSection";
+import { getRydoraSections } from "@/lib/rydora";
 import PageBanner from "../../../components/PageBanner";
 import { blogs } from "../../../data/blogs";
 
@@ -49,7 +50,10 @@ async function CategoryContent({ params }: { params: Promise<{ slug: string }> }
           { label: decoded }
         ]}
       />
-      <BlogSection categorySlug={slug} />
+      <BlogSection
+        data={getRydoraSections().BlogNews?.variants?.RydoraBlogNews1}
+        categorySlug={slug}
+      />
     </main>
   );
 }

@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import type { ReactNode } from "react";
 import ContactForm from "../components/ContactForm";
+import { getRydoraSections } from "@/lib/rydora";
 import PageBanner from "../components/PageBanner";
 
 export const metadata: Metadata = {
@@ -15,17 +16,17 @@ const contactInfo: { icon: LucideIcon; title: string; lines: ReactNode[] }[] = [
   {
     icon: Phone,
     title: "Call Us",
-    lines: [<a key="tel" href="tel:+919876543210">+91 98765 43210</a>, "Mon - Sat, 9:00 AM - 8:00 PM"],
+    lines: [<a key="tel" href="tel:+10000000000">+1 0000000000</a>, "Mon - Sat, 9:00 AM - 8:00 PM"],
   },
   {
     icon: Mail,
     title: "Email Us",
-    lines: [<a key="mail" href="mailto:info@rydora.com">info@rydora.com</a>, "We reply within 24 hours"],
+    lines: [<a key="mail" href="mailto:info@xyz.com">info@xyz.com</a>, "We reply within 24 hours"],
   },
   {
     icon: MapPin,
     title: "Visit Our Office",
-    lines: ["123 Business Park, MG Road,", "Bangalore, Karnataka 560001"],
+    lines: ["123 Business Avenue,", "New York, NY 10001, USA"],
   },
   {
     icon: Clock,
@@ -35,6 +36,8 @@ const contactInfo: { icon: LucideIcon; title: string; lines: ReactNode[] }[] = [
 ];
 
 export default function ContactPage() {
+  const sections = getRydoraSections();
+
   return (
     <main className="flex-1">
       <PageBanner title="Contact Us" />
@@ -42,7 +45,7 @@ export default function ContactPage() {
       <section className="bg-white py-14 text-neutral-900 sm:py-20">
         <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
           <div className="grid gap-5 lg:grid-cols-2">
-            <ContactForm />
+            <ContactForm data={sections.ContactPage?.variants?.RydoraContactPage1} />
 
             <div className="flex flex-col gap-5">
               <div className="rounded-2xl bg-[#faf3ee] p-6 sm:p-7">
@@ -97,7 +100,7 @@ export default function ContactPage() {
           <div className="mt-5 overflow-hidden rounded-2xl border border-neutral-100 shadow-[0_10px_30px_rgba(0,0,0,0.06)]">
             <iframe
               title="Rydora Car Rentals location"
-              src="https://www.google.com/maps?q=MG+Road,+Bengaluru,+Karnataka+560001&z=13&output=embed"
+              src="https://www.google.com/maps?q=New+York,+NY+10001,+USA&z=13&output=embed"
               className="h-[300px] w-full sm:h-[360px]"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"

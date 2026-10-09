@@ -3,11 +3,16 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRef, useState } from "react";
-import data from "../../data/rydora.json";
+import type { FleetData } from "@/types/rydora.types";
+import { Reveal } from "./motion";
 
-const { popular_cars } = data;
-
-export default function PopularCars({ isGrid = false }: { isGrid?: boolean } = {}) {
+export default function PopularCars({
+  data,
+  isGrid = false,
+}: {
+  data?: FleetData;
+  isGrid?: boolean;
+}) {
   const trackRef = useRef<HTMLDivElement>(null);
   const [activeArrow, setActiveArrow] = useState<"prev" | "next">("next");
 
@@ -20,22 +25,24 @@ export default function PopularCars({ isGrid = false }: { isGrid?: boolean } = {
     track.scrollBy({ left: dir * step, behavior: "smooth" });
   };
 
+  if (!data) return null;
+
   return (
     <section id="cars" className="relative overflow-hidden bg-white py-10 text-neutral-900 sm:py-12">
       <div className="pointer-events-none absolute -right-40 top-0 h-[420px] w-[620px] rounded-full bg-[#f6e7dc]/60 blur-3xl" />
 
       <div className="relative mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
-        <div className="flex items-end justify-between gap-6">
+        <Reveal className="flex items-end justify-between gap-6">
           <div>
             <p className="flex items-center gap-3 text-sm font-medium text-copper-dark">
               <span className="h-px w-10 bg-copper" />
-              {popular_cars.section_title}
+              {data.badge}
             </p>
             <h2 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl lg:text-[44px]">
-              {popular_cars.main_heading} <span className="text-[#a8521f]">{popular_cars.main_heading_highlight}</span>
+              {data.heading.main} <span className="text-[#a8521f]">{data.heading.highlight}</span>
             </h2>
             <p className="mt-3 max-w-xl text-base leading-relaxed text-neutral-600 sm:text-lg">
-              {popular_cars.description}
+              {data.description}
             </p>
           </div>
 
@@ -67,8 +74,9 @@ export default function PopularCars({ isGrid = false }: { isGrid?: boolean } = {
               </button>
             </div>
           )}
-        </div>
+        </Reveal>
 
+        <Reveal delay={0.15} y={40}>
         <div
           ref={trackRef}
           className={
@@ -77,17 +85,17 @@ export default function PopularCars({ isGrid = false }: { isGrid?: boolean } = {
               : "-mx-2 mt-8 flex snap-x snap-mandatory gap-5 overflow-x-auto px-2 pb-6 pt-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           }
         >
-          {popular_cars.list.map((car) => (
+          {data.list.map((car) => (
             <article
               key={car.name}
               data-card={!isGrid ? "" : undefined}
               className={
                 isGrid
-                  ? "overflow-hidden rounded-2xl border border-white bg-white shadow-[0_8px_30px_rgba(120,60,20,0.10)]"
-                  : "w-full shrink-0 snap-center overflow-hidden rounded-2xl border border-white bg-white shadow-[0_8px_30px_rgba(120,60,20,0.10)] sm:w-[calc((100%-20px)/2)] sm:snap-start lg:w-[calc((100%-60px)/4)]"
+                  ? "flex flex-col overflow-hidden rounded-2xl border border-white bg-white shadow-[0_8px_30px_rgba(120,60,20,0.10)]"
+                  : "w-full shrink-0 flex flex-col snap-center overflow-hidden rounded-2xl border border-white bg-white shadow-[0_8px_30px_rgba(120,60,20,0.10)] sm:w-[calc((100%-20px)/2)] sm:snap-start lg:w-[calc((100%-60px)/4)] lg:max-[1179px]:w-[calc((100%-40px)/3)]"
               }
             >
-              <div className="relative aspect-[4/3] bg-gradient-to-br from-[#fbf3ee] via-white to-[#f7e9df]">
+              <div className="relative shrink-0 aspect-[4/3] bg-gradient-to-br from-[#fbf3ee] via-white to-[#f7e9df]">
                 <div className="absolute -right-10 -top-10 h-32 w-40 rotate-12 rounded-3xl bg-[#f3dccd]/50" />
                 <Image
                   src={car.image}
@@ -98,10 +106,10 @@ export default function PopularCars({ isGrid = false }: { isGrid?: boolean } = {
                 />
               </div>
 
-              <div className="bg-gradient-to-b from-white to-[#fdf8f5] px-5 pb-5 pt-3">
+              <div className="bg-gradient-to-b from-white to-[#fdf8f5] px-5 pb-5 pt-3 flex flex-1 flex-col lg:px-4 xl:px-5">
                 <h3 className="text-lg font-bold">{car.name}</h3>
 
-                <div className="mt-3 flex flex-wrap items-center justify-between gap-x-2 gap-y-1 text-[13px] font-medium text-neutral-700">
+                <div className="mt-3 mb-5 flex flex-wrap items-center justify-between gap-x-2 gap-y-1 whitespace-nowrap text-[13px] font-medium text-neutral-700 lg:flex-nowrap lg:gap-x-1.5 lg:text-[12px] xl:text-[13px]">
                   <span className="flex items-center gap-1">
                     <UserIcon />
                     {car.seats} Seats
@@ -118,17 +126,20 @@ export default function PopularCars({ isGrid = false }: { isGrid?: boolean } = {
                   </span>
                 </div>
 
-                <Link
-                  href={popular_cars.enquire_button_link}
-                  className="mt-5 flex items-center justify-center gap-3 rounded-full bg-gradient-to-b from-copper-light to-copper-dark py-3 text-[15px] font-semibold text-white shadow-md shadow-copper/25 transition hover:brightness-110"
-                >
-                  {popular_cars.enquire_button_text}
-                  <Arrow />
-                </Link>
+                <div className="mt-auto">
+                  <Link
+                    href={data.cta.href}
+                    className="flex items-center justify-center gap-3 rounded-full bg-gradient-to-b from-copper-light to-copper-dark py-3 text-[15px] font-semibold text-white shadow-md shadow-copper/25 transition hover:brightness-110"
+                  >
+                    {data.cta.label}
+                    <Arrow />
+                  </Link>
+                </div>
               </div>
             </article>
           ))}
         </div>
+        </Reveal>
 
         {!isGrid && (
           <div className="flex justify-center gap-3 sm:hidden">
