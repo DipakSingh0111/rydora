@@ -59,7 +59,7 @@ export default function Services({
               className="group relative h-full overflow-hidden rounded-xl border border-neutral-200/70 bg-white p-5 shadow-[0_6px_24px_rgba(120,60,20,0.06)] transition hover:-translate-y-1 hover:shadow-[0_14px_34px_rgba(120,60,20,0.12)]"
             >
               <div className="flex items-start justify-between">
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#f8e4d7] text-[#a8521f]">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#faefe9] text-[#b25724]">
                   {iconMap[s.icon]}
                 </span>
                 <div className="relative -mr-6 -mt-1 h-24 w-[62%]">
@@ -73,12 +73,12 @@ export default function Services({
                 </div>
               </div>
 
-              <h3 className="mt-2 text-base font-bold">{s.title}</h3>
-              <p className="mt-2 max-w-[90%] text-sm leading-relaxed text-neutral-600">{s.text}</p>
+              <h3 className="mt-3 text-[15px] font-bold text-neutral-900">{s.title}</h3>
+              <p className="mt-1.5 max-w-[90%] text-[12px] leading-relaxed text-neutral-500">{s.text}</p>
 
               <Link
                 href={`/services/${s.slug}`}
-                className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-[#a8521f] hover:text-copper-dark"
+                className="mt-3 inline-flex items-center gap-1.5 text-[13px] font-bold text-[#b25724] hover:text-[#9c4c1f]"
               >
                 Read More
                 <Arrow />

@@ -106,32 +106,27 @@ export default function PopularCars({
                 />
               </div>
 
-              <div className="bg-gradient-to-b from-white to-[#fdf8f5] px-5 pb-5 pt-3 flex flex-1 flex-col lg:px-4 xl:px-5">
-                <h3 className="text-lg font-bold">{car.name}</h3>
+              <div className="bg-white px-5 pb-5 pt-3 flex flex-1 flex-col lg:px-4 xl:px-5">
+                <h3 className="text-lg font-bold text-neutral-900">{car.name}</h3>
 
-                <div className="mt-3 mb-5 flex flex-wrap items-center justify-between gap-x-2 gap-y-1 whitespace-nowrap text-[13px] font-medium text-neutral-700 lg:flex-nowrap lg:gap-x-1.5 lg:text-[12px] xl:text-[13px]">
-                  <span className="flex items-center gap-1">
+                <div className="mt-3 mb-5 flex items-center justify-start gap-4 whitespace-nowrap text-[13px] font-medium text-neutral-600">
+                  <span className="flex items-center gap-1.5">
                     <UserIcon />
                     {car.seats} Seats
                   </span>
-                  <span className="h-3 w-px bg-neutral-300" />
-                  <span className="flex items-center gap-1">
+                  <span className="h-4 w-px bg-neutral-300" />
+                  <span className="flex items-center gap-1.5">
                     <GearIcon />
                     {car.transmission}
-                  </span>
-                  <span className="h-3 w-px bg-neutral-300" />
-                  <span className="flex items-center gap-1">
-                    <GasIcon />
-                    {car.fuel}
                   </span>
                 </div>
 
                 <div className="mt-auto">
                   <Link
                     href={data.cta.href}
-                    className="flex items-center justify-center gap-3 rounded-full bg-gradient-to-b from-copper-light to-copper-dark py-3 text-[15px] font-semibold text-white shadow-md shadow-copper/25 transition hover:brightness-110"
+                    className="flex w-full items-center justify-center gap-2 rounded-full bg-[#b25724] py-3 text-[14px] font-semibold text-white shadow-sm transition hover:bg-[#9c4c1f]"
                   >
-                    {data.cta.label}
+                    Enquire Now
                     <Arrow />
                   </Link>
                 </div>
@@ -184,33 +179,17 @@ function Arrow({ className = "" }: { className?: string }) {
 
 function UserIcon() {
   return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="#b0602c" aria-hidden>
-      <circle cx="12" cy="7.5" r="4" />
-      <path d="M4 20.5c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5a.5.5 0 0 1-.5.5h-15a.5.5 0 0 1-.5-.5z" />
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#b25724" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+      <circle cx="12" cy="7" r="4" />
     </svg>
   );
 }
 
 function GearIcon() {
   return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#b0602c" strokeWidth="2" strokeLinecap="round" aria-hidden>
-      <circle cx="5" cy="5" r="2" />
-      <circle cx="12" cy="5" r="2" />
-      <circle cx="19" cy="5" r="2" />
-      <circle cx="5" cy="19" r="2" />
-      <circle cx="12" cy="19" r="2" />
-      <path d="M5 7v12M12 7v12M19 7v5H5" />
-    </svg>
-  );
-}
-
-function GasIcon() {
-  return (
-    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#b0602c" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-      <path d="M3 22h12" />
-      <path d="M14 22V5a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v17" />
-      <path d="M14 7h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-3" />
-      <line x1="4" y1="12" x2="14" y2="12" />
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#b25724" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
     </svg>
   );
 }
