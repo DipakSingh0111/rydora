@@ -3,9 +3,9 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
-import type { GalleryData } from "@/types/rydora.types";
+import type { SectionProps } from "@/types/rydora.types";
 
-export default function CarGallery({ data }: { data?: GalleryData }) {
+export default function CarGallery({ data }: SectionProps.Gallery) {
   const [activeImageIndex, setActiveImageIndex] = useState<number | null>(null);
   const images = data?.list ?? [];
   const count = images.length;

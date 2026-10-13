@@ -3,16 +3,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRef, useState } from "react";
-import type { FleetData } from "@/types/rydora.types";
-import { Reveal } from "./motion";
+import type { SectionProps } from "@/types/rydora.types";
+import { Reveal } from "@/components/ui/motion";
 
 export default function PopularCars({
   data,
   isGrid = false,
-}: {
-  data?: FleetData;
-  isGrid?: boolean;
-}) {
+}: SectionProps.Fleet) {
   const trackRef = useRef<HTMLDivElement>(null);
   const [activeArrow, setActiveArrow] = useState<"prev" | "next">("next");
 

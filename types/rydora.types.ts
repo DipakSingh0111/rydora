@@ -247,6 +247,43 @@ export interface FooterData {
   legalLinks: string[];
 }
 
+export interface SectionProps<T = any> {
+  data?: T;
+}
+
+export namespace SectionProps {
+  export type Header = { data?: HeaderData };
+  export type Hero = { data?: HeroData };
+  export type About = { data?: AboutUsData; hideButton?: boolean };
+  export type WorkingProcess = { data?: WorkingProcessData };
+  export type WhyChooseUs = { data?: WhyChooseUsData };
+  export type Services = { data?: ServicesData; showViewAll?: boolean };
+  export type Fleet = { data?: FleetData; isGrid?: boolean };
+  export type Brands = { data?: BrandsData };
+  export type Testimonials = { data?: TestimonialsData };
+  export type Gallery = { data?: GalleryData };
+  export type BlogNews = { data?: BlogNewsData; limit?: number; categorySlug?: string };
+  export type EnquiryForm = { data?: EnquiryFormData };
+  export type ContactPage = { data?: ContactPageData };
+  export type Footer = { data?: FooterData };
+}
+
+// Backward compatibility aliases
+export type HeaderProps = SectionProps.Header;
+export type HeroProps = SectionProps.Hero;
+export type AboutProps = SectionProps.About;
+export type WorkingProcessProps = SectionProps.WorkingProcess;
+export type WhyChooseUsProps = SectionProps.WhyChooseUs;
+export type ServicesProps = SectionProps.Services;
+export type FleetProps = SectionProps.Fleet;
+export type BrandsProps = SectionProps.Brands;
+export type TestimonialsProps = SectionProps.Testimonials;
+export type GalleryProps = SectionProps.Gallery;
+export type BlogNewsProps = SectionProps.BlogNews;
+export type EnquiryFormProps = SectionProps.EnquiryForm;
+export type ContactPageProps = SectionProps.ContactPage;
+export type FooterProps = SectionProps.Footer;
+
 export interface TemplateComponentRef {
   key: string;
   component: string;

@@ -2,10 +2,10 @@
 
 import React, { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight, Star, User } from "lucide-react";
-import type { TestimonialsData } from "@/types/rydora.types";
-import { Reveal } from "./motion";
+import type { SectionProps } from "@/types/rydora.types";
+import { Reveal } from "@/components/ui/motion";
 
-export default function Testimonials({ data }: { data?: TestimonialsData }) {
+export default function Testimonials({ data }: SectionProps.Testimonials) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [activeArrow, setActiveArrow] = useState<"prev" | "next">("next");
   const [cardsPerView, setCardsPerView] = useState(3);

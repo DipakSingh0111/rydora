@@ -1,9 +1,9 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import BlogSection from "../../../components/BlogSection";
+import { BlogSection } from "@/components/blog";
+import { PageBanner } from "@/components/common";
 import { getRydoraSections } from "@/lib/rydora";
-import PageBanner from "../../../components/PageBanner";
 import { blogs } from "../../../data/blogs";
 
 export function generateStaticParams() {

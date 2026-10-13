@@ -1,7 +1,7 @@
 import Image from "next/image";
 import type { ReactNode } from "react";
-import type { WhyChooseUsData, WhyChooseUsFeature } from "@/types/rydora.types";
-import { Reveal, Stagger, StaggerItem } from "./motion";
+import type { SectionProps, WhyChooseUsFeature } from "@/types/rydora.types";
+import { Reveal, Stagger, StaggerItem } from "@/components/ui/motion";
 
 const iconMap: Record<string, ReactNode> = {
   FleetIcon: <FleetIcon />,
@@ -12,7 +12,7 @@ const iconMap: Record<string, ReactNode> = {
   ReadyIcon: <ReadyIcon />,
 };
 
-export default function WhyChooseUs({ data }: { data?: WhyChooseUsData }) {
+export default function WhyChooseUs({ data }: SectionProps.WhyChooseUs) {
   if (!data) return null;
 
   return (

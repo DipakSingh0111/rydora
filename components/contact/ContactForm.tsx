@@ -14,12 +14,12 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { useState, type FormEvent, type InputHTMLAttributes } from "react";
-import type { ContactPageData } from "@/types/rydora.types";
+import type { SectionProps } from "@/types/rydora.types";
 
 const carTypes = ["Hatchback", "Sedan", "SUV", "MUV / MPV", "Luxury", "Wedding Car"];
 const durations = ["Few Hours", "1 Day", "2 - 3 Days", "1 Week", "1 Month+"];
 
-export default function ContactForm({ data }: { data?: ContactPageData }) {
+export default function ContactForm({ data }: SectionProps.ContactPage) {
   const [sent, setSent] = useState(false);
   const [formKey, setFormKey] = useState(0);
 

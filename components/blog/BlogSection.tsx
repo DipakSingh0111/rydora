@@ -1,19 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { blogs } from "../data/blogs";
-import type { BlogNewsData } from "@/types/rydora.types";
-import { Reveal, Stagger, StaggerItem } from "./motion";
+import { blogs } from "@/app/data/blogs";
+import type { SectionProps } from "@/types/rydora.types";
+import { Reveal, Stagger, StaggerItem } from "@/components/ui/motion";
 
 export default function BlogSection({
   data,
   limit,
   categorySlug,
-}: {
-  data?: BlogNewsData;
-  limit?: number;
-  categorySlug?: string;
-}) {
+}: SectionProps.BlogNews) {
   if (!data) return null;
 
   let posts = blogs;

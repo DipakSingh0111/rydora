@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { AboutUsData } from "@/types/rydora.types";
-import { Reveal, Stagger, StaggerItem } from "./motion";
+import type { SectionProps } from "@/types/rydora.types";
+import { Reveal, Stagger, StaggerItem } from "@/components/ui/motion";
 
 const iconMap: Record<string, React.ReactNode> = {
   CarFrontIcon: <CarFrontIcon />,
@@ -11,10 +11,7 @@ const iconMap: Record<string, React.ReactNode> = {
 export default function About({
   data,
   hideButton = false,
-}: {
-  data?: AboutUsData;
-  hideButton?: boolean;
-}) {
+}: SectionProps.About) {
   if (!data) return null;
 
   return (

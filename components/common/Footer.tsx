@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
-import type { FooterData } from "@/types/rydora.types";
-import { Stagger, StaggerItem } from "./motion";
+import type { SectionProps } from "@/types/rydora.types";
+import { Stagger, StaggerItem } from "@/components/ui/motion";
 
 const iconMap: Record<string, ReactNode> = {
   PinIcon: <PinIcon />,
@@ -15,7 +15,7 @@ const iconMap: Record<string, ReactNode> = {
   LinkedInIcon: <LinkedInIcon />,
 };
 
-export default function Footer({ data }: { data?: FooterData }) {
+export default function Footer({ data }: SectionProps.Footer) {
   if (!data) return null;
 
   return (

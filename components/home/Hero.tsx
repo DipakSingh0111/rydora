@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
-import type { HeroData } from "@/types/rydora.types";
-import { Reveal, Stagger, StaggerItem } from "./motion";
+import type { SectionProps } from "@/types/rydora.types";
+import { Reveal, Stagger, StaggerItem } from "@/components/ui/motion";
 
 const iconMap: Record<string, ReactNode> = {
   DiamondIcon: <DiamondIcon />,
@@ -10,7 +10,7 @@ const iconMap: Record<string, ReactNode> = {
   BadgeIcon: <BadgeIcon />,
 };
 
-export default function Hero({ data }: { data?: HeroData }) {
+export default function Hero({ data }: SectionProps.Hero) {
   if (!data) return null;
 
   return (

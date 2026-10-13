@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Reveal } from "./motion";
+import { Reveal } from "@/components/ui/motion";
 
 type Crumb = { label: string; href?: string };
 

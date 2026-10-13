@@ -2,10 +2,10 @@
 
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
-import type { BrandsData } from "@/types/rydora.types";
-import { Reveal } from "./motion";
+import type { SectionProps } from "@/types/rydora.types";
+import { Reveal } from "@/components/ui/motion";
 
-export default function Brands({ data }: { data?: BrandsData }) {
+export default function Brands({ data }: SectionProps.Brands) {
   const trackRef = useRef<HTMLDivElement>(null);
   const [pages, setPages] = useState(1);
   const [page, setPage] = useState(0);

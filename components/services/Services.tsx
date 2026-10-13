@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
-import type { ServicesData } from "@/types/rydora.types";
-import { Reveal, Stagger, StaggerItem } from "./motion";
+import type { SectionProps } from "@/types/rydora.types";
+import { Reveal, Stagger, StaggerItem } from "@/components/ui/motion";
 
 const iconMap: Record<string, ReactNode> = {
   CarIcon: <CarIcon />,
@@ -18,10 +18,7 @@ const iconMap: Record<string, ReactNode> = {
 export default function Services({
   data,
   showViewAll = true,
-}: {
-  data?: ServicesData;
-  showViewAll?: boolean;
-}) {
+}: SectionProps.Services) {
   if (!data) return null;
 
   return (

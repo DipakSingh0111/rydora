@@ -17,11 +17,11 @@ import {
   ChevronDown,
   type LucideIcon,
 } from "lucide-react";
-import type { EnquiryFormData } from "@/types/rydora.types";
+import type { SectionProps } from "@/types/rydora.types";
 
 const featureIcons: Record<string, LucideIcon> = { Car, Tag, Headphones, ShieldCheck };
 
-export default function CarRentalEnquiry({ data }: { data?: EnquiryFormData }) {
+export default function CarRentalEnquiry({ data }: SectionProps.EnquiryForm) {
   const [formData, setFormData] = useState({
     name: "",
     phone: "",

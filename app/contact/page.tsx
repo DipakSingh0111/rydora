@@ -2,9 +2,9 @@ import { Clock, Mail, MapPin, Phone, type LucideIcon } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import type { ReactNode } from "react";
-import ContactForm from "../components/ContactForm";
+import { PageBanner } from "@/components/common";
+import { ContactForm } from "@/components/contact";
 import { getRydoraSections } from "@/lib/rydora";
-import PageBanner from "../components/PageBanner";
 
 export const metadata: Metadata = {
   title: "Contact Us",

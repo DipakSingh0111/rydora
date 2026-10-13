@@ -4,9 +4,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import type { HeaderData } from "@/types/rydora.types";
+import type { SectionProps } from "@/types/rydora.types";
 
-export default function Navbar({ data }: { data?: HeaderData }) {
+export default function Navbar({ data }: SectionProps.Header) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const isActive = (href: string) => href === pathname;

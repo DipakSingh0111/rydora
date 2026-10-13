@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { WorkingProcessData } from "@/types/rydora.types";
-import { Reveal, Stagger, StaggerItem } from "./motion";
+import type { SectionProps } from "@/types/rydora.types";
+import { Reveal, Stagger, StaggerItem } from "@/components/ui/motion";
 
-export default function HowItWorks({ data }: { data?: WorkingProcessData }) {
+export default function HowItWorks({ data }: SectionProps.WorkingProcess) {
   if (!data) return null;
 
   return (

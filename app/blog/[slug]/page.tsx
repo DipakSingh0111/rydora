@@ -9,7 +9,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import PageBanner from "../../components/PageBanner";
+import { PageBanner } from "@/components/common";
 import { blogs, getBlogBySlug, getBlogCategories } from "../../data/blogs";
 import { getRydoraSections } from "@/lib/rydora";
 
