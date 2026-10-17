@@ -3,23 +3,26 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { PageBanner } from "@/components/common";
+import PageBanner from "@/components/common/PageBanner";
 import { getServiceBySlug, serviceDetails } from "../../data/services";
 
 export function generateStaticParams() {
   return serviceDetails.map((s) => ({ slug: s.slug }));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
-  const { slug } = await params;
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> | { slug: string } }): Promise<Metadata> {
+  const resolvedParams = params ? await Promise.resolve(params) : undefined;
+  const slug = resolvedParams?.slug;
+  if (!slug) return {};
   const service = getServiceBySlug(slug);
   if (!service) return {};
   return { title: service.name, description: service.intro };
 }
 
-export default async function ServiceDetailsPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
-  const service = getServiceBySlug(slug);
+export default async function ServiceDetailsPage({ params }: { params: Promise<{ slug: string }> | { slug: string } }) {
+  const resolvedParams = params ? await Promise.resolve(params) : undefined;
+  const slug = resolvedParams?.slug;
+  const service = slug ? getServiceBySlug(slug) : undefined;
   if (!service) notFound();
 
   return (

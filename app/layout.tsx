@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
-import { Footer, Navbar } from "@/components/common";
+import Footer from "@/components/common/Footer";
+import Navbar from "@/components/common/Navbar";
 import { MotionProvider } from "@/components/ui/motion";
 import "./globals.css";
 import { getRydoraSections } from "@/lib/rydora";

@@ -52,6 +52,7 @@ export interface HeroData {
   description: string;
   cta: LinkItem;
   image: ImageItem;
+  slides?: ImageItem[];
   list: HeroFeature[];
 }
 

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import { WhyChooseUs } from "@/components/about";
-import { PageBanner } from "@/components/common";
-import { PopularCars } from "@/components/fleet";
+import PageBanner from "@/components/common/PageBanner";
+import PopularCars from "@/components/fleet/PopularCars";
 import { getRydoraSections } from "@/lib/rydora";
 
 export const metadata: Metadata = {
@@ -16,7 +15,6 @@ export default function CarsPage() {
     <main className="flex-1">
       <PageBanner title="Cars" />
       <PopularCars data={sections.Fleet?.variants?.RydoraFleet1} isGrid />
-      <WhyChooseUs data={sections.WhyChooseUs?.variants?.RydoraWhyChooseUs1} />
     </main>
   );
 }

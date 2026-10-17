@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { BlogSection } from "@/components/blog";
-import { PageBanner } from "@/components/common";
+import BlogSection from "@/components/blog/BlogSection";
+import PageBanner from "@/components/common/PageBanner";
 import { getRydoraSections } from "@/lib/rydora";
 
 export const metadata: Metadata = {

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
-import { About, HowItWorks, WhyChooseUs } from "@/components/about";
-import { PageBanner } from "@/components/common";
+import About from "@/components/about/About";
+import HowItWorks from "@/components/about/HowItWorks";
+import WhyChooseUs from "@/components/about/WhyChooseUs";
+import PageBanner from "@/components/common/PageBanner";
 import { getRydoraSections } from "@/lib/rydora";
 
 export const metadata: Metadata = {

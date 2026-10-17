@@ -1,8 +1,8 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { BlogSection } from "@/components/blog";
-import { PageBanner } from "@/components/common";
+import BlogSection from "@/components/blog/BlogSection";
+import PageBanner from "@/components/common/PageBanner";
 import { getRydoraSections } from "@/lib/rydora";
 import { blogs } from "../../../data/blogs";
 
@@ -13,16 +13,17 @@ export function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata(props: { params: Promise<{ slug: string }> }): Promise<Metadata> {
-  const { slug } = await props.params;
-  const decoded = slug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+export async function generateMetadata(props: { params: Promise<{ slug: string }> | { slug: string } }): Promise<Metadata> {
+  const resolvedParams = props.params ? await Promise.resolve(props.params) : undefined;
+  const slug = resolvedParams?.slug || "";
+  const decoded = slug ? slug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ') : "Category";
   return {
     title: `${decoded} - Blogs`,
     description: `Read our latest blogs in the ${decoded} category.`,
   };
 }
 
-export default function CategoryPage(props: { params: Promise<{ slug: string }> }) {
+export default function CategoryPage(props: { params: Promise<{ slug: string }> | { slug: string } }) {
   return (
     <Suspense fallback={<div className="py-20 text-center text-neutral-500">Loading...</div>}>
       <CategoryContent params={props.params} />
@@ -30,11 +31,12 @@ export default function CategoryPage(props: { params: Promise<{ slug: string }> 
   );
 }
 
-async function CategoryContent({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
-  const categoryExists = blogs.some(b => b.category.toLowerCase().replace(/\s+/g, '-') === slug);
+async function CategoryContent({ params }: { params: Promise<{ slug: string }> | { slug: string } }) {
+  const resolvedParams = params ? await Promise.resolve(params) : undefined;
+  const slug = resolvedParams?.slug;
+  const categoryExists = slug ? blogs.some(b => b.category.toLowerCase().replace(/\s+/g, '-') === slug) : false;
   
-  if (!categoryExists) {
+  if (!slug || !categoryExists) {
     notFound();
   }
 

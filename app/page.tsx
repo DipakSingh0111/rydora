@@ -1,8 +1,11 @@
-import { About, HowItWorks } from "@/components/about";
-import { BlogSection } from "@/components/blog";
-import { PopularCars } from "@/components/fleet";
-import { Brands, Hero, Testimonials } from "@/components/home";
-import { Services } from "@/components/services";
+import About from "@/components/about/About";
+import HowItWorks from "@/components/about/HowItWorks";
+import BlogSection from "@/components/blog/BlogSection";
+import PopularCars from "@/components/fleet/PopularCars";
+import Brands from "@/components/home/Brands";
+import Hero from "@/components/home/Hero";
+import Testimonials from "@/components/home/Testimonials";
+import Services from "@/components/services/Services";
 import { getRydoraSections } from "@/lib/rydora";
 
 export default function Home() {

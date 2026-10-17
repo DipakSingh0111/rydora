@@ -2,8 +2,8 @@ import { Clock, Mail, MapPin, Phone, type LucideIcon } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import type { ReactNode } from "react";
-import { PageBanner } from "@/components/common";
-import { ContactForm } from "@/components/contact";
+import PageBanner from "@/components/common/PageBanner";
+import ContactForm from "@/components/contact/ContactForm";
 import { getRydoraSections } from "@/lib/rydora";
 
 export const metadata: Metadata = {

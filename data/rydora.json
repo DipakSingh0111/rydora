@@ -154,6 +154,20 @@
                 "src": "/images/hero-car.jpg",
                 "alt": "Black luxury sedan parked at dusk with a city skyline"
               },
+              "slides": [
+                {
+                  "src": "/images/hero-car.jpg",
+                  "alt": "Black luxury sedan parked at dusk with a city skyline"
+                },
+                {
+                  "src": "/images/about-car.jpg",
+                  "alt": "Black Rydora SUV on a coastal mountain road at sunset"
+                },
+                {
+                  "src": "/images/showroom.jpg",
+                  "alt": "Exclusive Rydora luxury showroom cars"
+                }
+              ],
               "list": [
                 {
                   "title": "Premium Fleet",
@@ -407,6 +421,34 @@
                   "image": "/images/cars/fortuner.jpg",
                   "seats": 7,
                   "transmission": "Automatic",
+                  "fuel": "Diesel"
+                },
+                {
+                  "name": "Honda City",
+                  "image": "/images/cars/city.jpg",
+                  "seats": 5,
+                  "transmission": "Automatic",
+                  "fuel": "Petrol"
+                },
+                {
+                  "name": "Mahindra XUV700",
+                  "image": "/images/cars/xuv700.jpg",
+                  "seats": 7,
+                  "transmission": "Automatic",
+                  "fuel": "Diesel"
+                },
+                {
+                  "name": "Mercedes-Benz E-Class",
+                  "image": "/images/cars/luxury.jpg",
+                  "seats": 5,
+                  "transmission": "Automatic",
+                  "fuel": "Petrol"
+                },
+                {
+                  "name": "Luxury Urbania Van",
+                  "image": "/images/cars/van.jpg",
+                  "seats": 12,
+                  "transmission": "Manual",
                   "fuel": "Diesel"
                 }
               ]

@@ -2,13 +2,24 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import { LuX, LuChevronLeft, LuChevronRight, LuPlus } from "react-icons/lu";
 import type { SectionProps } from "@/types/rydora.types";
+
+const INITIAL_COUNT = 8;
+const LOAD_MORE_STEP = 8;
 
 export default function CarGallery({ data }: SectionProps.Gallery) {
   const [activeImageIndex, setActiveImageIndex] = useState<number | null>(null);
+  const [visibleCount, setVisibleCount] = useState<number>(INITIAL_COUNT);
+
   const images = data?.list ?? [];
   const count = images.length;
+  const visibleImages = images.slice(0, visibleCount);
+  const hasMore = visibleCount < count;
+
+  const handleLoadMore = () => {
+    setVisibleCount((prev) => prev + LOAD_MORE_STEP);
+  };
 
   // Keyboard navigation (Arrow keys + Escape to close)
   useEffect(() => {
@@ -72,9 +83,9 @@ export default function CarGallery({ data }: SectionProps.Gallery) {
       <div className="max-w-7xl mx-auto">
         {/* 4 Column Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5">
-          {images.map((image, index) => (
+          {visibleImages.map((image, index) => (
             <button
-              key={image.id}
+              key={`${image.id}-${index}`}
               type="button"
               onClick={() => setActiveImageIndex(index)}
               className="group relative w-full aspect-[16/10] overflow-hidden rounded-2xl bg-gray-200 shadow-sm transition-all duration-300 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#c85a17]/50"
@@ -92,6 +103,20 @@ export default function CarGallery({ data }: SectionProps.Gallery) {
             </button>
           ))}
         </div>
+
+        {/* Load More Button */}
+        {hasMore && (
+          <div className="mt-12 flex justify-center">
+            <button
+              type="button"
+              onClick={handleLoadMore}
+              className="inline-flex items-center justify-center gap-2.5 rounded-full bg-gradient-to-b from-copper-light to-copper-dark px-8 py-3.5 text-[15px] font-semibold text-white shadow-md shadow-copper/25 transition-all duration-300 hover:brightness-110 hover:-translate-y-0.5 active:scale-95 cursor-pointer"
+            >
+              <LuPlus className="h-4 w-4" />
+              Load More
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Lightbox */}
@@ -107,7 +132,7 @@ export default function CarGallery({ data }: SectionProps.Gallery) {
             className="absolute top-5 right-5 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 active:scale-95"
             aria-label="Close image popup"
           >
-            <X className="h-6 w-6" />
+            <LuX className="h-6 w-6" />
           </button>
 
           {/* Previous Button */}
@@ -117,7 +142,7 @@ export default function CarGallery({ data }: SectionProps.Gallery) {
             className="absolute left-4 sm:left-8 z-20 flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white transition-all hover:bg-white/25 active:scale-95"
             aria-label="Previous image"
           >
-            <ChevronLeft className="h-6 w-6" />
+            <LuChevronLeft className="h-6 w-6" />
           </button>
 
           {/* Main */}
@@ -141,7 +166,7 @@ export default function CarGallery({ data }: SectionProps.Gallery) {
             className="absolute right-4 sm:right-8 z-20 flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white transition-all hover:bg-white/25 active:scale-95"
             aria-label="Next image"
           >
-            <ChevronRight className="h-6 w-6" />
+            <LuChevronRight className="h-6 w-6" />
           </button>
 
           {/* Index */}

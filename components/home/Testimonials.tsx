@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { ChevronLeft, ChevronRight, Star, User } from "lucide-react";
+import { LuChevronLeft, LuChevronRight, LuStar, LuUser } from "react-icons/lu";
 import type { SectionProps } from "@/types/rydora.types";
 import { Reveal } from "@/components/ui/motion";
 
@@ -78,7 +78,7 @@ export default function Testimonials({ data }: SectionProps.Testimonials) {
                     : "bg-[#fdeee4] hover:bg-[#fbdcd0] text-[#c85a17]"
                 }`}
               >
-                <ChevronLeft className="w-5 h-5" />
+                <LuChevronLeft className="w-5 h-5" />
               </button>
               <button
                 type="button"
@@ -90,7 +90,7 @@ export default function Testimonials({ data }: SectionProps.Testimonials) {
                     : "bg-[#fdeee4] hover:bg-[#fbdcd0] text-[#c85a17]"
                 }`}
               >
-                <ChevronRight className="w-5 h-5" />
+                <LuChevronRight className="w-5 h-5" />
               </button>
             </div>
           </div>
@@ -106,23 +106,23 @@ export default function Testimonials({ data }: SectionProps.Testimonials) {
               {data.list.map((item) => (
                 <div
                   key={item.id}
-                  className="w-full sm:w-[calc(50%-10px)] lg:w-[calc((100%-40px)/3)] shrink-0 relative bg-[#fdfbf7] border border-[#f3eee7] rounded-2xl p-6 shadow-sm hover:shadow-md transition-all flex flex-col justify-between"
+                  className="group w-full sm:w-[calc(50%-10px)] lg:w-[calc((100%-40px)/3)] shrink-0 relative bg-[#fdfbf7] border border-[#f3eee7] rounded-2xl p-6 shadow-sm transition-all duration-300 ease-out hover:-translate-y-2 hover:bg-white hover:border-[#e9bf9f] hover:shadow-[0_16px_36px_rgba(178,87,36,0.14)] flex flex-col justify-between cursor-pointer"
                 >
                   {/* Decorative Quote Mark */}
-                  <span className="absolute top-5 right-5 text-4xl font-serif text-[#c85a17]/20 select-none pointer-events-none leading-none">
+                  <span className="absolute top-5 right-5 text-4xl font-serif text-[#c85a17]/20 select-none pointer-events-none leading-none transition-all duration-300 group-hover:text-[#c85a17]/40 group-hover:scale-110">
                     “
                   </span>
 
                   <div>
                     {/* User Avatar Icon */}
-                    <div className="w-12 h-12 rounded-full bg-[#fbe7dc] flex items-center justify-center mb-4 text-[#c85a17]">
-                      <User className="w-6 h-6 fill-[#c85a17]/20" />
+                    <div className="w-12 h-12 rounded-full bg-[#fbe7dc] flex items-center justify-center mb-4 text-[#c85a17] transition-all duration-300 group-hover:bg-[#b25724] group-hover:text-white group-hover:scale-105 shadow-sm">
+                      <LuUser className="w-6 h-6" />
                     </div>
 
                     {/* Stars */}
-                    <div className="flex items-center gap-1 mb-3">
+                    <div className="flex items-center gap-1 mb-3 transition-transform duration-300 group-hover:translate-x-0.5">
                       {Array.from({ length: item.rating }).map((_, i) => (
-                        <Star
+                        <LuStar
                           key={i}
                           className="w-4 h-4 fill-[#f59e0b] text-[#f59e0b]"
                         />
@@ -130,14 +130,14 @@ export default function Testimonials({ data }: SectionProps.Testimonials) {
                     </div>
 
                     {/* Author Details */}
-                    <h3 className="text-base font-bold text-[#111827]">
+                    <h3 className="text-base font-bold text-[#111827] transition-colors duration-300 group-hover:text-[#b25724]">
                       {item.name}
                     </h3>
                     <p className="text-xs text-[#6b7280] font-medium mb-4">
                       {item.role}
                     </p>
 
-                    <hr className="border-t border-[#f2ede6] mb-4" />
+                    <hr className="border-t border-[#f2ede6] mb-4 transition-colors duration-300 group-hover:border-[#eeddcc]" />
 
                     {/* Testimonial Body */}
                     <p className="text-xs sm:text-[13px] leading-relaxed text-[#4b5563]">

@@ -9,7 +9,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { PageBanner } from "@/components/common";
+import PageBanner from "@/components/common/PageBanner";
 import { blogs, getBlogBySlug, getBlogCategories } from "../../data/blogs";
 import { getRydoraSections } from "@/lib/rydora";
 
@@ -18,15 +18,17 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata(
-  { params }: { params: Promise<{ slug: string }> }
+  { params }: { params: Promise<{ slug: string }> | { slug: string } }
 ): Promise<Metadata> {
-  const { slug } = await params;
+  const resolvedParams = params ? await Promise.resolve(params) : undefined;
+  const slug = resolvedParams?.slug;
+  if (!slug) return {};
   const post = getBlogBySlug(slug);
   if (!post) return {};
   return { title: post.title, description: post.description };
 }
 
-export default function BlogDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+export default function BlogDetailPage({ params }: { params: Promise<{ slug: string }> | { slug: string } }) {
   return (
     <main className="flex-1">
       <PageBanner
@@ -44,9 +46,10 @@ export default function BlogDetailPage({ params }: { params: Promise<{ slug: str
   );
 }
 
-async function BlogDetailContent({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
-  const post = getBlogBySlug(slug);
+async function BlogDetailContent({ params }: { params: Promise<{ slug: string }> | { slug: string } }) {
+  const resolvedParams = params ? await Promise.resolve(params) : undefined;
+  const slug = resolvedParams?.slug;
+  const post = slug ? getBlogBySlug(slug) : undefined;
   if (!post) notFound();
 
   const categories = getBlogCategories();
@@ -169,37 +172,6 @@ async function BlogDetailContent({ params }: { params: Promise<{ slug: string }>
                   </li>
                 ))}
               </ul>
-            </div>
-
-            <div className="relative isolate overflow-hidden rounded-2xl bg-black p-6 text-white">
-              <Image
-                src={sidebar.cta.image}
-                alt=""
-                fill
-                sizes="300px"
-                className="-z-20 object-cover"
-              />
-              <div className="absolute inset-0 -z-10 bg-gradient-to-b from-black/80 via-black/40 to-black/20" />
-              <p className="text-xs font-semibold text-white/80">
-                {sidebar.cta.badge}
-              </p>
-              <span className="mt-2 block h-0.5 w-8 bg-copper" />
-              <h3 className="mt-3 text-2xl font-bold leading-tight">
-                {sidebar.cta.heading.main}
-                <br />
-                {sidebar.cta.heading.highlight}
-              </h3>
-              <p className="mt-3 max-w-[200px] text-sm leading-relaxed text-white/85">
-                {sidebar.cta.description}
-              </p>
-              <Link
-                href={sidebar.cta.button.href}
-                className="mt-5 inline-flex items-center gap-2 rounded-md bg-gradient-to-b from-[#c4561f] to-[#a8461a] px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-black/40 transition hover:brightness-110"
-              >
-                {sidebar.cta.button.label}
-                <ArrowRight size={16} />
-              </Link>
-              <div className="h-36" />
             </div>
           </aside>
         </div>

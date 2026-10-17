@@ -1,18 +1,29 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
+import {
+  FaCarSide,
+  FaRoute,
+  FaPlaneArrival,
+  FaCrown,
+  FaUsers,
+  FaCalendarDays,
+  FaLocationDot,
+} from "react-icons/fa6";
+import { RiSteering2Fill } from "react-icons/ri";
+import { LuArrowRight } from "react-icons/lu";
 import type { SectionProps } from "@/types/rydora.types";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/motion";
 
 const iconMap: Record<string, ReactNode> = {
-  CarIcon: <CarIcon />,
-  RoadIcon: <RoadIcon />,
-  PlaneIcon: <PlaneIcon />,
-  CrownIcon: <CrownIcon />,
-  TeamIcon: <TeamIcon />,
-  CalendarIcon: <CalendarIcon />,
-  PinIcon: <PinIcon />,
-  SteeringIcon: <SteeringIcon />,
+  CarIcon: <FaCarSide className="h-6 w-6" />,
+  RoadIcon: <FaRoute className="h-6 w-6" />,
+  PlaneIcon: <FaPlaneArrival className="h-6 w-6" />,
+  CrownIcon: <FaCrown className="h-6 w-6" />,
+  TeamIcon: <FaUsers className="h-6 w-6" />,
+  CalendarIcon: <FaCalendarDays className="h-6 w-6" />,
+  PinIcon: <FaLocationDot className="h-6 w-6" />,
+  SteeringIcon: <RiSteering2Fill className="h-7 w-7" />,
 };
 
 export default function Services({
@@ -44,7 +55,7 @@ export default function Services({
               className="group inline-flex shrink-0 items-center gap-2 text-[15px] font-semibold text-[#a8521f] hover:text-copper-dark"
             >
               {data.cta.label}
-              <Arrow className="transition group-hover:translate-x-1" />
+              <LuArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
             </Link>
           )}
         </Reveal>
@@ -56,7 +67,7 @@ export default function Services({
               className="group relative h-full overflow-hidden rounded-xl border border-neutral-200/70 bg-white p-5 shadow-[0_6px_24px_rgba(120,60,20,0.06)] transition hover:-translate-y-1 hover:shadow-[0_14px_34px_rgba(120,60,20,0.12)]"
             >
               <div className="flex items-start justify-between">
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#faefe9] text-[#b25724]">
+                <span className="flex h-[52px] w-[52px] shrink-0 items-center justify-center rounded-full bg-[#faefe9] text-[#b25724] shadow-sm transition-all duration-300 group-hover:bg-[#b25724] group-hover:text-white group-hover:scale-105">
                   {iconMap[s.icon]}
                 </span>
                 <div className="relative -mr-6 -mt-1 h-24 w-[62%]">
@@ -78,7 +89,7 @@ export default function Services({
                 className="mt-3 inline-flex items-center gap-1.5 text-[13px] font-bold text-[#b25724] hover:text-[#9c4c1f]"
               >
                 Read More
-                <Arrow />
+                <LuArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
               </Link>
             </article>
             </StaggerItem>
@@ -86,82 +97,5 @@ export default function Services({
         </Stagger>
       </div>
     </section>
-  );
-}
-
-function Arrow({ className = "" }: { className?: string }) {
-  return (
-    <svg className={className} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-      <path d="M5 12h14M13 6l6 6-6 6" />
-    </svg>
-  );
-}
-
-function CarIcon() {
-  return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-      <path d="M5 11l1.5-4.5A2 2 0 0 1 8.4 5h7.2a2 2 0 0 1 1.9 1.5L19 11a2 2 0 0 1 2 2v4a1 1 0 0 1-1 1h-1v1.5a1 1 0 0 1-2 0V18H7v1.5a1 1 0 0 1-2 0V18H4a1 1 0 0 1-1-1v-4a2 2 0 0 1 2-2zm2.1 0h9.8l-1.2-3.6a.6.6 0 0 0-.6-.4H8.9a.6.6 0 0 0-.6.4L7.1 11zM6.5 15.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm11 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
-    </svg>
-  );
-}
-
-function RoadIcon() {
-  return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-      <path d="M8 3h3.2l-.2 3h2l-.2-3H16l4 18h-6.6l-.3-4h-2.2l-.3 4H4L8 3zm2.8 6l-.3 5h3l-.3-5h-2.4z" />
-    </svg>
-  );
-}
-
-function PlaneIcon() {
-  return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-      <path d="M21 15.5v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V8.5l-8 5v2l8-2.5V18l-2 1.5V21l3.5-1 3.5 1v-1.5L13 18v-5l8 2.5z" />
-    </svg>
-  );
-}
-
-function CrownIcon() {
-  return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-      <path d="M3 7l4.5 4L12 4l4.5 7L21 7l-2 11H5L3 7zm2 13h14v1.5H5V20z" />
-    </svg>
-  );
-}
-
-function TeamIcon() {
-  return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-      <circle cx="12" cy="7" r="3.2" />
-      <circle cx="5" cy="9" r="2.3" />
-      <circle cx="19" cy="9" r="2.3" />
-      <path d="M6.5 19c0-3.3 2.5-5.5 5.5-5.5s5.5 2.2 5.5 5.5v.5h-11V19zM1 18.5c0-2.4 1.7-4 4-4 .8 0 1.5.2 2.1.5A7 7 0 0 0 5 19.5H1v-1zm22 0c0-2.4-1.7-4-4-4-.8 0-1.5.2-2.1.5a7 7 0 0 1 2.1 4.5h4v-1z" />
-    </svg>
-  );
-}
-
-function CalendarIcon() {
-  return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-      <path d="M7 2.5a1 1 0 0 1 2 0V4h6V2.5a1 1 0 0 1 2 0V4h1.5A2.5 2.5 0 0 1 21 6.5v12a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 18.5v-12A2.5 2.5 0 0 1 5.5 4H7V2.5zM5 9v9.5c0 .3.2.5.5.5h13c.3 0 .5-.2.5-.5V9H5zm2 2h2v2H7v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2zm-8 4h2v2H7v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2z" />
-    </svg>
-  );
-}
-
-function PinIcon() {
-  return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-      <path d="M12 2a7 7 0 0 1 7 7c0 5-7 13-7 13S5 14 5 9a7 7 0 0 1 7-7zm0 4.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5z" />
-    </svg>
-  );
-}
-
-function SteeringIcon() {
-  return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" aria-hidden>
-      <circle cx="12" cy="12" r="8.5" />
-      <circle cx="12" cy="12" r="2" fill="currentColor" />
-      <path d="M3.8 10.5c2.7.3 5.5.3 8.2.3s5.5 0 8.2-.3M12 14v6.5" />
-    </svg>
   );
 }
