@@ -64,7 +64,7 @@ export default function Services({
           {data.list.map((s) => (
             <StaggerItem key={s.title}>
             <article
-              className="group relative h-full overflow-hidden rounded-xl border border-neutral-200/70 bg-white p-5 shadow-[0_6px_24px_rgba(120,60,20,0.06)] transition hover:-translate-y-1 hover:shadow-[0_14px_34px_rgba(120,60,20,0.12)]"
+              className="group relative flex h-full flex-col overflow-hidden rounded-xl border border-neutral-200/70 bg-white p-5 shadow-[0_6px_24px_rgba(120,60,20,0.06)] transition hover:-translate-y-1 hover:shadow-[0_14px_34px_rgba(120,60,20,0.12)]"
             >
               <div className="flex items-start justify-between">
                 <span className="flex h-[52px] w-[52px] shrink-0 items-center justify-center rounded-full bg-[#faefe9] text-[#b25724] shadow-sm transition-all duration-300 group-hover:bg-[#b25724] group-hover:text-white group-hover:scale-105">
@@ -84,13 +84,15 @@ export default function Services({
               <h3 className="mt-3 text-[15px] font-bold text-neutral-900">{s.title}</h3>
               <p className="mt-1.5 max-w-[90%] text-[12px] leading-relaxed text-neutral-500">{s.text}</p>
 
-              <Link
-                href={`/services/${s.slug}`}
-                className="mt-3 inline-flex items-center gap-1.5 text-[13px] font-bold text-[#b25724] hover:text-[#9c4c1f]"
-              >
-                Read More
-                <LuArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
-              </Link>
+              <div className="mt-auto pt-4">
+                <Link
+                  href={`/services/${s.slug}`}
+                  className="inline-flex items-center gap-1.5 text-[13px] font-bold text-[#b25724] hover:text-[#9c4c1f]"
+                >
+                  Read More
+                  <LuArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+                </Link>
+              </div>
             </article>
             </StaggerItem>
           ))}
