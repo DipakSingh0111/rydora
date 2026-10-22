@@ -85,9 +85,12 @@ export default function BlogSection({
 
               <div className="p-6 flex flex-col flex-1 justify-between">
                 <div>
-                  <span className="inline-block bg-[#fbebe3] text-[#c85a17] text-[11px] font-bold px-2.5 py-1 rounded-md mb-3 tracking-wide">
+                  <Link
+                    href={`/blog/category/${post.category.toLowerCase().replace(/\s+/g, '-')}`}
+                    className="inline-block bg-[#fbebe3] text-[#c85a17] text-[11px] font-bold px-2.5 py-1 rounded-md mb-3 tracking-wide hover:bg-[#c85a17] hover:text-white transition"
+                  >
                     {post.category}
-                  </span>
+                  </Link>
 
                   <h3 className="text-lg font-bold text-[#111827] leading-snug group-hover:text-[#c85a17] transition-colors duration-200">
                     <Link href={`/blog/${post.slug}`}>{post.title}</Link>

@@ -124,7 +124,7 @@ async function BlogDetailContent({ params }: { params: Promise<{ slug: string }>
                   return (
                     <li key={c.name}>
                       <Link
-                        href={`/blog/${c.slug}`}
+                        href={`/blog/category/${c.slug}`}
                         aria-current={active ? "page" : undefined}
                         className={`flex items-center justify-between rounded-lg px-4 py-3 text-sm shadow-[0_2px_8px_rgba(0,0,0,0.04)] transition ${
                           active

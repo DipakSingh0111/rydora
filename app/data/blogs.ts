@@ -236,7 +236,9 @@ export function getBlogBySlug(slug: string) {
 }
 
 export function getBlogCategories() {
-  const firstPost = new Map<string, string>();
-  for (const b of blogs) if (!firstPost.has(b.category)) firstPost.set(b.category, b.slug);
-  return [...firstPost.entries()].map(([name, slug]) => ({ name, slug }));
+  const categories = Array.from(new Set(blogs.map((b) => b.category)));
+  return categories.map((name) => ({
+    name,
+    slug: name.toLowerCase().replace(/\s+/g, "-"),
+  }));
 }

@@ -777,7 +777,44 @@
                 "messagePlaceholder": "Your Message (Optional)",
                 "submitText": "Send Message",
                 "successMessage": "Thank you! Your message has been sent. We'll get back to you shortly."
-              }
+              },
+              "info": {
+                "badge": "Contact Information",
+                "heading": {
+                  "main": "We're Always Here",
+                  "highlight": "for You"
+                },
+                "description": "Reach out to us through any of the following channels. Our team is ready to assist you with bookings, inquiries, and support.",
+                "items": [
+                  {
+                    "icon": "Phone",
+                    "title": "Call Us",
+                    "lines": ["+1 0000000000", "Mon - Sat, 9:00 AM - 8:00 PM"],
+                    "link": "tel:+10000000000"
+                  },
+                  {
+                    "icon": "Mail",
+                    "title": "Email Us",
+                    "lines": ["info@xyz.com", "We reply within 24 hours"],
+                    "link": "mailto:info@xyz.com"
+                  },
+                  {
+                    "icon": "MapPin",
+                    "title": "Visit Our Office",
+                    "lines": ["123 Business Avenue,", "New York, NY 10001, USA"]
+                  },
+                  {
+                    "icon": "Clock",
+                    "title": "Working Hours",
+                    "lines": ["Mon - Sat: 9:00 AM - 8:00 PM", "Sunday: 10:00 AM - 6:00 PM"]
+                  }
+                ],
+                "showroomImage": {
+                  "src": "/images/showroom.jpg",
+                  "alt": "Rydora car rentals showroom"
+                }
+              },
+              "mapUrl": "https://www.google.com/maps?q=New+York,+NY+10001,+USA&z=13&output=embed"
             }
           }
         },

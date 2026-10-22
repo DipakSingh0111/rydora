@@ -218,6 +218,13 @@ export interface EnquiryFormData {
   };
 }
 
+export interface ContactInfoItem {
+  icon: string;
+  title: string;
+  lines: string[];
+  link?: string;
+}
+
 export interface ContactPageData {
   badge: string;
   heading: SectionHeading;
@@ -234,6 +241,14 @@ export interface ContactPageData {
     submitText: string;
     successMessage: string;
   };
+  info?: {
+    badge: string;
+    heading: SectionHeading;
+    description: string;
+    items: ContactInfoItem[];
+    showroomImage: ImageItem;
+  };
+  mapUrl?: string;
 }
 
 export interface FooterData {
