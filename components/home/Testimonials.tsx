@@ -7,7 +7,6 @@ import { Reveal } from "@/components/ui/motion";
 
 export default function Testimonials({ data }: SectionProps.Testimonials) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [activeArrow, setActiveArrow] = useState<"prev" | "next">("next");
   const [cardsPerView, setCardsPerView] = useState(3);
 
   useEffect(() => {
@@ -28,13 +27,11 @@ export default function Testimonials({ data }: SectionProps.Testimonials) {
   // Ek baar mein 1 card peeche
   const handlePrev = () => {
     setCurrentIndex((prev) => (prev <= 0 ? maxIndex : prev - 1));
-    setActiveArrow("prev");
   };
 
   // Ek baar mein 1 card aage
   const handleNext = () => {
     setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
-    setActiveArrow("next");
   };
 
   if (!data) return null;
@@ -66,17 +63,13 @@ export default function Testimonials({ data }: SectionProps.Testimonials) {
               </p>
             </div>
 
-            {/* Navigation Buttons (1 click = 1 card slide) */}
+            {/* Navigation Buttons */}
             <div className="flex items-center gap-3 pt-8 lg:pt-12">
               <button
                 type="button"
                 onClick={handlePrev}
                 aria-label="Previous card"
-                className={`w-10 h-10 rounded-full flex items-center justify-center transition-all active:scale-95 cursor-pointer ${
-                  activeArrow === "prev"
-                    ? "bg-[#c85a17] hover:bg-[#b04f14] text-white shadow-sm"
-                    : "bg-[#fdeee4] hover:bg-[#fbdcd0] text-[#c85a17]"
-                }`}
+                className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 active:scale-95 cursor-pointer bg-[#fdeee4] text-[#c85a17] hover:bg-[#c85a17] hover:text-white hover:shadow-md"
               >
                 <LuChevronLeft className="w-5 h-5" />
               </button>
@@ -84,11 +77,7 @@ export default function Testimonials({ data }: SectionProps.Testimonials) {
                 type="button"
                 onClick={handleNext}
                 aria-label="Next card"
-                className={`w-10 h-10 rounded-full flex items-center justify-center transition-all active:scale-95 cursor-pointer ${
-                  activeArrow === "next"
-                    ? "bg-[#c85a17] hover:bg-[#b04f14] text-white shadow-sm"
-                    : "bg-[#fdeee4] hover:bg-[#fbdcd0] text-[#c85a17]"
-                }`}
+                className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 active:scale-95 cursor-pointer bg-[#fdeee4] text-[#c85a17] hover:bg-[#c85a17] hover:text-white hover:shadow-md"
               >
                 <LuChevronRight className="w-5 h-5" />
               </button>
